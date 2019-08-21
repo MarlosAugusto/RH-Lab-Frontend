@@ -4,8 +4,16 @@ import './App.css';
 
 function App() {
   function handleTest() {
+    const data = {
+      method: 'POST',
+      headers: {
+        Accept: 'application/json',
+        'Content-Type': 'application/json; charset=utf-8'
+      },
+      mode: 'cors'
+    }
     console.log("test")
-    fetch("https://rh-lab-backend.herokuapp.com/test")
+    fetch("https://rh-lab-backend.herokuapp.com/test" , data);
   }
   return (
     <div className="App">
