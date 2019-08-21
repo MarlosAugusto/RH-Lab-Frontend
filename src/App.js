@@ -3,6 +3,9 @@ import logo from './logo.svg';
 import './App.css';
 
 function App() {
+  function handleTest() {
+    fetch("https://rh-lab-backend.herokuapp.com/test")
+  }
   return (
     <div className="App">
       <header className="App-header">
@@ -18,6 +21,7 @@ function App() {
         >
           Learn React
         </a>
+        <button onClick={handleTest()}>Test Back</button>
       </header>
     </div>
   );
