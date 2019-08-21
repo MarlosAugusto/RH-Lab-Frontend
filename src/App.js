@@ -30,7 +30,7 @@ function App() {
         >
           Learn React
         </a>
-        <button onClick={handleTest()}>Test Back</button>
+        <button onClick={() => handleTest()}>Test Back</button>
       </header>
     </div>
   );
