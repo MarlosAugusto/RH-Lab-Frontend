@@ -4,6 +4,7 @@ import './App.css';
 
 function App() {
   function handleTest() {
+    console.log("test")
     fetch("https://rh-lab-backend.herokuapp.com/test")
   }
   return (
