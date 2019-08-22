@@ -13,7 +13,7 @@ function App() {
       mode: 'cors'
     }
     console.log("test")
-    fetch("https://rh-lab-backend.herokuapp.com/test" , data);
+    fetch("https://rh-lab-backend.herokuapp.com/test", data);
   }
   return (
     <div className="App">
