@@ -1,10 +1,9 @@
 import React from 'react';
 import dotenv from 'dotenv';
-
-dotenv.config();
-
 import logo from './logo.svg';
 import './App.css';
+
+dotenv.config();
 
 function App() {
   // function handleTest() {
