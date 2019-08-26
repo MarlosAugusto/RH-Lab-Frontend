@@ -1,7 +1,7 @@
 import React from 'react';
 import dotenv from 'dotenv';
 
-dotenf.config();
+dotenv.config();
 
 import logo from './logo.svg';
 import './App.css';
