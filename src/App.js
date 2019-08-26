@@ -1,20 +1,24 @@
 import React from 'react';
+import dotenv from 'dotenv';
+
+dotenf.config();
+
 import logo from './logo.svg';
 import './App.css';
 
 function App() {
-  function handleTest() {
-    const data = {
-      method: 'POST',
-      headers: {
-        Accept: 'application/json',
-        'Content-Type': 'application/json; charset=utf-8'
-      },
-      mode: 'cors'
-    }
-    console.log("test")
-    fetch("https://rh-lab-backend.herokuapp.com/test", data);
-  }
+  // function handleTest() {
+  //   const data = {
+  //     method: 'POST',
+  //     headers: {
+  //       Accept: 'application/json',
+  //       'Content-Type': 'application/json; charset=utf-8'
+  //     },
+  //     mode: 'cors'
+  //   }
+  //   console.log("test")
+  //   fetch(`${process.env.DB_URI}/test`, data);
+  // }
   return (
     <div className="App">
       <header className="App-header">
@@ -30,7 +34,7 @@ function App() {
         >
           Learn React
         </a>
-        <button onClick={() => handleTest()}>Test Back</button>
+        {/* <button onClick={() => handleTest()}>Test Back</button> */}
       </header>
     </div>
   );
