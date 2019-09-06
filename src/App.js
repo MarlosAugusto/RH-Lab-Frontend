@@ -1,7 +1,8 @@
 import React from 'react';
 import dotenv from 'dotenv';
-import { Container } from "./components/container";
-import { Header } from "./components/header";
+// import { Container } from "./components/container";
+// import { Header } from "./components/header";
+import Colaborador from './pages/colaborators/Colaborador';
 dotenv.config();
 
 function App() {
@@ -19,10 +20,7 @@ function App() {
   // }
   return (
     <div className="App">
-      <Container>
-        <Header/>
-        <h1>teste</h1>
-      </Container>
+      <Colaborador />
     </div>
   );
 }
