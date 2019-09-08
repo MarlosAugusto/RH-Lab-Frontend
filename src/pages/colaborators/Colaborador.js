@@ -4,24 +4,33 @@ import MultiStep from 'react-multistep';
 // import { Container } from './styles';
 import './css/prog-tracker.css';
 import './css/skeleton.css';
+//import './css/custom.css';
+import { DateInput } from "../../components/date";
+//import '../../components/date;
+import BuscaCep from './BuscaCep';
 
 export default function Colaborador() {
   const [nomeCompleto, setnomeCompleto] = useState('');
   const [nomeMae, setnomeMae] = useState('');
   const [nomePai, setnomePai] = useState('');
+  const [dataNasc, setdataNasc] = useState('');
+  const [genre, setGenre] = useState('Feminino');
+
   const [rg, setRG] = useState('');
   const [cpf, setCPF] = useState('');
   const [pis, setPIS] = useState('');
   const [codCarteira, setcodCarteira] = useState('');
   const [serieCarteira, setserieCarteira] = useState('');
-  const [ufCarteira, setufCarteira] = useState('');
+  const [ufCarteira, setufCarteira] = useState('UF');
   const [dataCarteira, setdataCarteira] = useState('');
+
+  const [cep, setCEP] = useState('');
+
   const [password, setPassword] = useState('');
   const [confirmPassword, setConfirmPassword] = useState('');
   const [checked, setChecked] = useState('');
   const [firstName, setfirstName] = useState('');
   const [lastName, setLastName] = useState('');
-  const [genre, setGenre] = useState('Feminino');
 
   // useEffect(() => {
   //   console.log("Genero:",genre)
@@ -75,6 +84,19 @@ export default function Colaborador() {
         </div>
         <div className='row'>
           <div className='six columns'>
+            <label>Data de Nascimento</label>
+            <DateInput
+              type='text'
+              placeholder='DD/MM/AAAA'
+              //onChange={e => setdataCarteira(e.target.value)}
+              //value={dataCarteira}
+              autoFocus
+            >
+            </DateInput>
+          </div>
+        </div>
+        <div className='row'>
+          <div className='six columns'>
             <label>Gênero</label>
             <select
               className='u-full-width'
@@ -84,12 +106,12 @@ export default function Colaborador() {
             >
               <option value="Feminino">Feminino</option>
               <option value="Masculino">Masculino</option>
-              <option value="Não Informar">Não Informar</option>
               <option value="Trans Homem">Trans Homem</option>
               <option value="Trans Mulher">Trans Mulher</option>
               <option value="Travesti">Travesti</option>
-              <option value="Masculino">Não Informar</option>
-              <option value="Masculino">Não Informar</option>
+              <option value="TransGênero">Trans Gênero</option>
+              <option value="Não Informar">Não Informar</option>
+              <option value="Sem genêro">Sem Gênero</option>
             </select>
           </div>
         </div>
@@ -142,14 +164,8 @@ export default function Colaborador() {
               value={serieCarteira}
               autoFocus
             />
-            <input
-              className='u-full-width required'
-              type='text'
-              placeholder='UF'
-              onChange={e => setufCarteira(e.target.value)}
-              value={ufCarteira}
-              autoFocus
-            />
+          </div>
+          <div className='six columns'>
             <input
               className='u-full-width required'
               type='text'
@@ -158,6 +174,49 @@ export default function Colaborador() {
               value={pis}
               autoFocus
             />
+            <label className='label'>UF</label>
+            <select
+              className='u-full-width'
+              onChange={e => setufCarteira(e.target.value)}
+              value={ufCarteira}
+            >
+              <option value="AC">Acre</option>
+              <option value="AL">Alagoas</option>
+              <option value="AP">Amapá</option>
+              <option value="AM">Amazonas</option>
+              <option value="BA">Bahia</option>
+              <option value="CE">Ceará</option>
+              <option value="DF">Distrito Federal</option>
+              <option value="ES">Espírito Santo</option>
+              <option value="GO">Goiás</option>
+              <option value="MA">Maranhão</option>
+              <option value="MT">Mato Grosso</option>
+              <option value="MS">Mato Grosso do Sul</option>
+              <option value="MG">Minas Gerais</option>
+              <option value="PA">Pará</option>
+              <option value="PB">Paraíba</option>
+              <option value="PR">Paraná</option>
+              <option value="PE">Pernambuco</option>
+              <option value="PI">Piauí</option>
+              <option value="RJ">Rio de Janeiro</option>
+              <option value="RN">Rio Grande do Norte</option>
+              <option value="RS">Rio Grande do Sul</option>
+              <option value="RO">Rondônia</option>
+              <option value="RR">Roraima</option>
+              <option value="SC">Santa Catarina</option>
+              <option value="SP">São Paulo</option>
+              <option value="SE">Sergipe</option>
+              <option value="TO">Tocantins</option>
+            </select>
+            <label className='label'>Data</label>
+            <DateInput
+              type='text'
+              placeholder='DD/MM/AAAA'
+              //onChange={e => setdataCarteira(e.target.value)}
+              //value={dataCarteira}
+              autoFocus
+            >
+            </DateInput>
           </div>
         </div>
       </div>
@@ -169,30 +228,16 @@ export default function Colaborador() {
       <div>
         <div className='row'>
           <div className='six columns'>
-            <label>Password</label>
-            <input
-              className='u-full-width required'
-              placeholder='Password'
-              type='password'
-              onChange={e => setPassword(e.target.value)}
-              value={password}
+            <BuscaCep
+              type='text'
+              onChange={e => setCEP(e.target.value)}
+              value={cep}
               autoFocus
-            />
+              required>
+            </BuscaCep>
           </div>
         </div>
-        <div className='row'>
-          <div className='six columns'>
-            <label>Confirm password</label>
-            <input
-              className='u-full-width'
-              placeholder='Confirm Password'
-              type='password'
-              onChange={e => setConfirmPassword(e.target.value)}
-              value={confirmPassword}
-            />
-          </div>
-        </div>
-      </div>
+      </div >
     )
   }
 
