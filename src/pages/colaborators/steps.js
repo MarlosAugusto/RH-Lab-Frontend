@@ -1,37 +1,51 @@
-  import React, { useState } from 'react';
+import React, { useState } from 'react';
 // import './css/custom.css';
 // import './css/normalize.css';
 import './css/prog-tracker.css';
 import './css/skeleton.css';
 
 export function StepOne() {
-  const [firstName, setfirstName] = useState('');
-  const [lastName, setLastName] = useState('');
+  const [nomeCompleto, setnomeCompleto] = useState('');
+  const [nomeMae, setnomeMae] = useState('');
+  const [nomePai, setnomePai] = useState('');
 
   return (
     <div>
       <div className='row'>
         <div className='six columns'>
-          <label>First Name</label>
+          <label>Nome</label>
           <input
             className='u-full-width'
-            placeholder='First Name'
+            placeholder='Nome completo'
             type='text'
-            onChange={e => setfirstName(e.target.value)}
-            value={firstName}
+            onChange={e => setnomeCompleto(e.target.value)}
+            value={nomeCompleto}
             autoFocus
           />
         </div>
       </div>
       <div className='row'>
         <div className='six columns'>
-          <label>Last Name</label>
+          <label>Mãe</label>
           <input
             className='u-full-width'
-            placeholder='Last Name'
+            placeholder='Nome da mãe'
             type='text'
-            onChange={e => setLastName(e.target.value)}
-            value={lastName}
+            onChange={e => setnomeMae(e.target.value)}
+            value={nomeMae}
+          />
+        </div>
+      </div>
+      <div className='row'>
+        <div className='six columns'>
+          <label>Pai</label>
+          <input
+            className='u-full-width'
+            placeholder='Nome do pai'
+            type='text'
+            onChange={e => setnomePai(e.target.value)}
+            value={nomePai}
+            autoFocus
           />
         </div>
       </div>
@@ -139,5 +153,40 @@ export function StepFour() {
         </div>
       </div>
     </div>
+  )
+}
+
+export function StepFive() {
+  const [firstName, setfirstName] = useState('');
+  const [lastName, setLastName] = useState('');
+
+  return (
+    <div>
+      <div className='row'>
+        <div className='six columns'>
+          <label>First Name</label>
+          <input
+            className='u-full-width'
+            placeholder='First Name'
+            type='text'
+            onChange={e => setfirstName(e.target.value)}
+            value={firstName}
+            autoFocus
+          />
+        </div>
+      </div>
+      <div className='row'>
+        <div className='six columns'>
+          <label>Last Name</label>
+          <input
+            className='u-full-width'
+            placeholder='Last Name'
+            type='text'
+            onChange={e => setLastName(e.target.value)}
+            value={lastName}
+          />
+        </div>
+      </div>
+    </div >
   )
 }

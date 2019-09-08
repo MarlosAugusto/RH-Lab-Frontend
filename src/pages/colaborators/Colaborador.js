@@ -1,14 +1,15 @@
 import React from 'react';
 import MultiStep from 'react-multistep';
-import { StepOne, StepTwo, StepThree, StepFour } from './steps';
+import { StepOne, StepTwo, StepThree, StepFour, StepFive } from './steps';
 // import { Container } from './styles';
 
 export default function Colaborador() {
   const steps = [
-    { name: 'StepOne', component: <StepOne /> },
-    { name: 'StepTwo', component: <StepTwo /> },
-    {name: 'StepThree', component: <StepThree/>},
-    {name: 'StepFour', component: <StepFour/>}
+    { name: 'Dados Gerais', component: <StepOne /> },
+    { name: 'Documentos', component: <StepTwo /> },
+    { name: 'Endereço', component: <StepThree /> },
+    { name: 'Contato', component: <StepFour /> },
+    { name: 'Perfil', component: <StepFive /> }
   ];
   return (
     <MultiStep showNavigation={true} steps={steps} />
