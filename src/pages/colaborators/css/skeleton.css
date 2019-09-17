@@ -28,6 +28,12 @@
 
 /* Grid
 –––––––––––––––––––––––––––––––––––––––––––––––––– */
+.label {
+  font-size: 80%;
+  line-height: 1.6;
+  font-weight: 400;
+}
+
 .container {
   position: relative;
   width: auto;

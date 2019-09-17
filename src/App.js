@@ -3,6 +3,7 @@ import dotenv from 'dotenv';
 // import { Container } from "./components/container";
 // import { Header } from "./components/header";
 import Colaborador from './pages/colaborators/Colaborador';
+import BuscaCep from './pages/colaborators/BuscaCep';
 dotenv.config();
 
 function App() {
@@ -20,6 +21,7 @@ function App() {
   // }
   return (
     <div className="App">
+      {/* <BuscaCep /> */}
       <Colaborador />
     </div>
   );
