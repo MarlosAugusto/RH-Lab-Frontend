@@ -2,12 +2,12 @@ import React, { useState, useEffect } from 'react';
 import MultiStep from 'react-multistep';
 // import { StepOne, StepTwo, StepThree, StepFour, StepFive } from './steps';
 // import { Container } from './styles';
-import './css/prog-tracker.css';
-import './css/skeleton.css';
+import '../css/prog-tracker.css';
+import '../css/skeleton.css';
 //import './css/custom.css';
 import { DateInput } from "../../components/date";
 //import '../../components/date;
-import BuscaCep from './BuscaCep';
+import BuscaCep from '../../services/BuscaCep';
 
 export default function Colaborador() {
   const [nomeCompleto, setnomeCompleto] = useState('');
@@ -25,6 +25,13 @@ export default function Colaborador() {
   const [dataCarteira, setdataCarteira] = useState('');
 
   const [cep, setCEP] = useState('');
+  const [mun, setNun] = useState('');
+  const [uf, setUF] = useState('');
+  const [logradouro, setLogradouro] = useState('');
+  const [num, setNum] = useState('');
+  const [complemento, setComplemento] = useState('');
+  const [bairro, setBairro] = useState('');
+
 
   const [password, setPassword] = useState('');
   const [confirmPassword, setConfirmPassword] = useState('');
@@ -237,6 +244,50 @@ export default function Colaborador() {
             </BuscaCep>
           </div>
         </div>
+        <div className='row'>
+          <div className='six columns'>
+            <label>Logradouro</label>
+            <input
+              className='u-full-width'
+              type='text'
+              onChange={e => setLogradouro(e.target.value)}
+              value={logradouro}
+            />
+          </div>
+        </div>
+        <div className='row'>
+          <div className='six columns'>
+            <label>Bairro</label>
+            <input
+              className='u-full-width'
+              type='text'
+              onChange={e => setBairro(e.target.value)}
+              value={bairro}
+            />
+          </div>
+        </div>
+        <div className='row'>
+          <div className='six columns'>
+            <label>Número</label>
+            <input
+              className='u-full-width'
+              type='text'
+              onChange={e => setNum(e.target.value)}
+              value={num}
+            />
+          </div>
+        </div>
+        <div className='row'>
+          <div className='six columns'>
+            <label>Complemento</label>
+            <input
+              className='u-full-width'
+              type='text'
+              onChange={e => setComplemento(e.target.value)}
+              value={complemento}
+            />
+          </div>
+        </div>
       </div >
     )
   }
@@ -244,7 +295,7 @@ export default function Colaborador() {
   function StepFour() {
     return (
       <div>
-        <div className='row'>
+        {/* <div className='row'>
           <div className='ten columns terms'>
             <span>By clicking "Accept" I agree that:</span>
             <ul className='docs-terms'>
@@ -266,6 +317,22 @@ export default function Colaborador() {
               />
               <span> Accept </span>{' '}
             </label>
+          </div>
+        </div> */}
+        <div className='row'>
+          <div className='six columns'>
+            <div>
+              <label>Contatos</label>
+              <button>Incluir</button>
+            </div>
+            <input
+              className='u-full-width'
+              placeholder='First Name'
+              type='text'
+              onChange={e => setfirstName(e.target.value)}
+              value={firstName}
+              autoFocus
+            />
           </div>
         </div>
       </div>

@@ -3,26 +3,14 @@ import dotenv from 'dotenv';
 // import { Container } from "./components/container";
 // import { Header } from "./components/header";
 import Colaborador from './pages/colaborators/Colaborador';
-import BuscaCep from './pages/colaborators/BuscaCep';
+import Cadastro from './pages/cadastro/Cadastro';
 dotenv.config();
 
 function App() {
-  // function handleTest() {
-  //   const data = {
-  //     method: 'POST',
-  //     headers: {
-  //       Accept: 'application/json',
-  //       'Content-Type': 'application/json; charset=utf-8'
-  //     },
-  //     mode: 'cors'
-  //   }
-  //   console.log("test")
-  //   fetch(`${process.env.DB_URI}/test`, data);
-  // }
+
   return (
     <div className="App">
-      {/* <BuscaCep /> */}
-      <Colaborador />
+      <Cadastro />
     </div>
   );
 }
