@@ -1,6 +1,6 @@
-import React from 'react'
-import { useRef } from 'react'
-import useInputMask from 'use-input-mask'
+import React from "react";
+import { useRef } from "react";
+import useInputMask from "use-input-mask";
 import { createAutoCorrectedDatePipe } from "text-mask-addons";
 
 export const DateInput = props => {
@@ -15,5 +15,12 @@ export const DateInput = props => {
     keepCharPositions: true
   });
 
-  return <input {...props} ref={input} onChange={onChange} />;
+  return (
+    <input
+      {...props}
+      ref={input}
+      onChange={onChange}
+      style={{ width: "100%" }}
+    />
+  );
 };
