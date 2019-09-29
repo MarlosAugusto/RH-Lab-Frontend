@@ -139,15 +139,13 @@ export default function Cadastro() {
     const [bairro, setBairro] = useState("");
 
     return (
-      <div>
-        <Row>
-          <BuscaCep
-            type="text"
-            onChange={e => setCEP(e.target.value)}
-            value={cep}
-            required
-          ></BuscaCep>
-        </Row>
+      <>
+        <BuscaCep
+          type="text"
+          onChange={e => setCEP(e.target.value)}
+          value={cep}
+          required
+        ></BuscaCep>
         <Row wd={11}>
           <Col c={6}>
             <label>Logradouro</label>
@@ -188,7 +186,7 @@ export default function Cadastro() {
             />
           </Col>
         </Row>
-      </div>
+      </>
     );
   }
 
@@ -214,13 +212,11 @@ export default function Cadastro() {
       };
 
       setItens(itens.concat(newItem));
-      setText('');
+      setText("");
     }
 
     function removeItem(id) {
-      setItens(
-        itens.filter(id)
-      )
+      setItens(itens.filter(id));
     }
     return (
       <div>
@@ -254,7 +250,8 @@ export default function Cadastro() {
               placeholder="Digite seu contato adicional"
               type="text"
               onChange={handleChange}
-              value={text} />
+              value={text}
+            />
           </Col>
           <Col c={5} float={"right"}>
             <br></br>
@@ -274,19 +271,15 @@ export default function Cadastro() {
     return (
       <div>
         <Row wd={11}>
-          <Col >
+          <Col>
             <label>Área de interesse</label>
-            <select
-              style={{ width: "100%" }}>
-            </select>
+            <select style={{ width: "100%" }}></select>
           </Col>
         </Row>
         <Row wd={11}>
-          <Col >
+          <Col>
             <label>Vaga de interesse</label>
-            <select
-              style={{ width: "100%" }}>
-            </select>
+            <select style={{ width: "100%" }}></select>
           </Col>
         </Row>
         <Row wd={11}>
@@ -307,7 +300,6 @@ export default function Cadastro() {
         </Row>
         <Row wd={11}>
           <Upload />
-
         </Row>
       </div>
     );
@@ -345,12 +337,12 @@ export default function Cadastro() {
               changeStep={handleStep.bind(this)}
             />
           ) : (
-              <Button
-                title="Voltar"
-                color="#554f4f"
-                changeStep={handleStep.bind(this)}
-              />
-            )}
+            <Button
+              title="Voltar"
+              color="#554f4f"
+              changeStep={handleStep.bind(this)}
+            />
+          )}
         </div>
         <div style={{ width: "50%" }}>
           {step === 3 ? (
@@ -360,12 +352,12 @@ export default function Cadastro() {
               changeStep={handleStep.bind(this)}
             />
           ) : (
-              <Button
-                title="Avançar"
-                color="#554f4f"
-                changeStep={handleStep.bind(this)}
-              />
-            )}
+            <Button
+              title="Avançar"
+              color="#554f4f"
+              changeStep={handleStep.bind(this)}
+            />
+          )}
         </div>
       </div>
     </Container>

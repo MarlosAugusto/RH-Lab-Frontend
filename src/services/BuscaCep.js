@@ -38,29 +38,27 @@ class BuscaCep extends React.Component {
 
   render() {
     return (
-      <div>
-        <Row wd={11}>
-          <Col c={6}>
-            <label>CEP</label>
-            <input
-              type="text"
-              onBlur={this.handleDados.bind(this)}
-              required="true"
-              placeholder="Cep..."
-              className="u-full-width"
-            />
-          </Col>
-          <Col c={5} float={"right"}>
-            <label>UF</label>
-            <input
-              type="text"
-              value={this.state.estado}
-              disabled
-              className="u-full-width required"
-            />
-          </Col>
-        </Row>
-        <Row wd={11}>
+      <Row wd={11}>
+        <Col c={3} float={"left"}>
+          <label>CEP</label>
+          <input
+            type="text"
+            onBlur={this.handleDados.bind(this)}
+            required="true"
+            placeholder="Cep..."
+            className="u-full-width"
+          />
+        </Col>
+        <Col c={3} float={"center"}>
+          <label>UF</label>
+          <input
+            type="text"
+            value={this.state.estado}
+            disabled
+            className="u-full-width required"
+          />
+        </Col>
+        <Col c={4} float={"right"}>
           <label>Cidade</label>
           <input
             type="text"
@@ -68,8 +66,8 @@ class BuscaCep extends React.Component {
             disabled
             className="u-full-width required"
           />
-        </Row>
-      </div>
+        </Col>
+      </Row>
     );
   }
 }
