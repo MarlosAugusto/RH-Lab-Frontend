@@ -2,7 +2,9 @@ import React from 'react';
 import ApiCep from './ApiCep';
 import '../pages/css/prog-tracker.css'
 import '../pages/css/skeleton.css'
-
+import Row from "../components/row";
+import Col from "../components/row";
+import { Container } from "../components/container";
 class BuscaCep extends React.Component {
   constructor() {
     super();
@@ -36,23 +38,37 @@ class BuscaCep extends React.Component {
 
   render() {
     return (
-      <div>
-        <div style={{ flexDirection: "row" }}>
-          <div style={{ width: "50%", float: "left" }}>
-            <label>CEP</label>
-            <input type="text" onBlur={this.handleDados.bind(this)} required="true" placeholder="Cep..." />
-          </div>
-          <div style={{ width: "50%", float: "right" }}>
+      <div style={{ display: "flex" }}>
+        <Row wd={11}>
+
+          <label>CEP</label>
+          <input
+            type="text"
+            onBlur={this.handleDados.bind(this)}
+            required="true"
+            placeholder="Cep..."
+            className="u-full-width" />
+
+          <Col c={5} >
             <label>UF</label>
-            <input type="text" value={this.state.estado} disabled />
-          </div>
-        </div>
-        <div className='row'>
-          <div>
-            <label>Cidade</label>
-            <input type="text" value={this.state.cidade} disabled />
-          </div>
-        </div>
+            <input
+              type="text"
+              value={this.state.estado}
+              disabled
+              className="u-full-width required"
+            />
+          </Col>
+        </Row>
+        <Row wd={11}>
+
+          <label>Cidade</label>
+          <input
+            type="text"
+            value={this.state.cidade}
+            disabled
+            className="u-full-width required" />
+
+        </Row>
       </div>
     );
   }

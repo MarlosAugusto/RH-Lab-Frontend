@@ -13,7 +13,9 @@ import Button from "../../components/button";
 import { Container, StepContainer } from "../../components/container";
 import Row from "../../components/row";
 import Col from "../../components/col";
-
+import Upload from "../../components/Upload/index";
+import FileList from "../../components/FileList";
+import ContatoList from "../../components/contact/contatoLista";
 export default function Cadastro() {
   const [step, setStep] = useState(0);
 
@@ -25,26 +27,17 @@ export default function Cadastro() {
       step === 0 ? setStep(0) : setStep(step - 1);
     }
   }
-
-  const [nomeCompleto, setnomeCompleto] = useState("");
-
-  const [rg, setRG] = useState("");
-  const [dataNasc, setdataNasc] = useState("");
-  const [genre, setGenre] = useState("Feminino");
-  const [senha, setSenha] = useState("");
-  const [confSenha, setConfSenha] = useState("");
-  const [cep, setCEP] = useState("");
-  const [logradouro, setLogradouro] = useState("");
-  const [num, setNum] = useState("");
-  const [complemento, setComplemento] = useState("");
-  const [bairro, setBairro] = useState("");
-  const [email, setEmail] = useState("");
-
   function submit() {
     // @TODO centralizar informações e enviar
   }
 
   function StepOne() {
+    const [nomeCompleto, setnomeCompleto] = useState("");
+    const [rg, setRG] = useState("");
+    const [dataNasc, setdataNasc] = useState("");
+    const [genre, setGenre] = useState("Feminino");
+    const [senha, setSenha] = useState("");
+    const [confSenha, setConfSenha] = useState("");
     const [cpf, setCPF] = useState("");
     return (
       <div>
@@ -139,20 +132,24 @@ export default function Cadastro() {
   }
 
   function StepTwo() {
+    const [cep, setCEP] = useState("");
+    const [logradouro, setLogradouro] = useState("");
+    const [num, setNum] = useState("");
+    const [complemento, setComplemento] = useState("");
+    const [bairro, setBairro] = useState("");
+
     return (
       <div>
         <Row wd={11}>
-          <div className="six columns">
-            <BuscaCep
-              type="text"
-              onChange={e => setCEP(e.target.value)}
-              value={cep}
-              required
-            ></BuscaCep>
-          </div>
+          <BuscaCep
+            type="text"
+            onChange={e => setCEP(e.target.value)}
+            value={cep}
+            required
+          ></BuscaCep>
         </Row>
         <Row wd={11}>
-          <div className="six columns">
+          <Col c={6}>
             <label>Logradouro</label>
             <input
               className="u-full-width"
@@ -160,21 +157,19 @@ export default function Cadastro() {
               onChange={e => setLogradouro(e.target.value)}
               value={logradouro}
             />
-          </div>
-        </Row>
-        <Row wd={11}>
-          <div className="six columns">
+          </Col>
+          <Col c={5} float={"right"}>
             <label>Bairro</label>
             <input
-              className="u-full-width"
+              className="u-full-width required"
               type="text"
               onChange={e => setBairro(e.target.value)}
               value={bairro}
             />
-          </div>
+          </Col>
         </Row>
         <Row wd={11}>
-          <div className="six columns">
+          <Col c={6}>
             <label>Número</label>
             <input
               className="u-full-width"
@@ -182,10 +177,8 @@ export default function Cadastro() {
               onChange={e => setNum(e.target.value)}
               value={num}
             />
-          </div>
-        </Row>
-        <Row wd={11}>
-          <div className="six columns">
+          </Col>
+          <Col c={5} float={"right"}>
             <label>Complemento</label>
             <input
               className="u-full-width"
@@ -193,17 +186,46 @@ export default function Cadastro() {
               onChange={e => setComplemento(e.target.value)}
               value={complemento}
             />
-          </div>
+          </Col>
         </Row>
       </div>
     );
   }
 
   function StepThree() {
+    const [email, setEmail] = useState("");
+    const [fone, setFone] = useState("");
+    const [text, setText] = useState("");
+    const [itens, setItens] = useState("");
+
+    function handleChange(e) {
+      setText(e.target.value);
+    }
+
+    function handleSubmit(e) {
+      e.preventDefaut();
+      if (!text.lenght) {
+        return;
+      }
+
+      const newItem = {
+        text: text,
+        id: Date.now()
+      };
+
+      setItens(itens.concat(newItem));
+      setText('');
+    }
+
+    function removeItem(id) {
+      setItens(
+        itens.filter(id)
+      )
+    }
     return (
       <div>
-        <Row>
-          <div className="six columns">
+        <Row wd={11}>
+          <Col c={6}>
             <label>Email</label>
             <input
               className="u-full-width"
@@ -212,22 +234,80 @@ export default function Cadastro() {
               onChange={e => setEmail(e.target.value)}
               value={email}
             />
-          </div>
+          </Col>
+          <Col c={5} float={"right"}>
+            <label>Celular</label>
+            <input
+              className="u-full-width"
+              placeholder="(99) 1234-12345"
+              type="text"
+              onChange={e => setFone(e.target.value)}
+              value={fone}
+            />
+          </Col>
+        </Row>
+        <Row wd={11}>
+          <Col c={6}>
+            <label>Contatos adicionais</label>
+            <input
+              className="u-full-width"
+              placeholder="Digite seu contato adicional"
+              type="text"
+              onChange={handleChange}
+              value={text} />
+          </Col>
+          <Col c={5} float={"right"}>
+            <br></br>
+            <button style={{ width: "100%", height: "44px" }}>Incluir</button>
+          </Col>
+        </Row>
+        <Row wd={11}>
+          <ContatoList itens={itens} removeItem={removeItem} />
         </Row>
       </div>
     );
   }
 
   function StepFour() {
+    const [pretSalarial, setPretSalarial] = useState("");
+
     return (
       <div>
-        <Row>
-          <div className="six columns">
-            <div>
-              <label>Contatos</label>
-              <button>Incluir</button>
-            </div>
-          </div>
+        <Row wd={11}>
+          <Col >
+            <label>Área de interesse</label>
+            <select
+              style={{ width: "100%" }}>
+            </select>
+          </Col>
+        </Row>
+        <Row wd={11}>
+          <Col >
+            <label>Vaga de interesse</label>
+            <select
+              style={{ width: "100%" }}>
+            </select>
+          </Col>
+        </Row>
+        <Row wd={11}>
+          <Col>
+            <label>Pretensão salarial</label>
+            <input
+              className="u-full-width"
+              type="text"
+              onChange={e => setPretSalarial(e.target.value)}
+              value={pretSalarial}
+            />
+          </Col>
+        </Row>
+        <Row wd={11}>
+          <Col>
+            <label>Anexar currículo</label>
+          </Col>
+        </Row>
+        <Row wd={11}>
+          <Upload />
+
         </Row>
       </div>
     );
@@ -265,12 +345,12 @@ export default function Cadastro() {
               changeStep={handleStep.bind(this)}
             />
           ) : (
-            <Button
-              title="Voltar"
-              color="#554f4f"
-              changeStep={handleStep.bind(this)}
-            />
-          )}
+              <Button
+                title="Voltar"
+                color="#554f4f"
+                changeStep={handleStep.bind(this)}
+              />
+            )}
         </div>
         <div style={{ width: "50%" }}>
           {step === 3 ? (
@@ -280,12 +360,12 @@ export default function Cadastro() {
               changeStep={handleStep.bind(this)}
             />
           ) : (
-            <Button
-              title="Avançar"
-              color="#554f4f"
-              changeStep={handleStep.bind(this)}
-            />
-          )}
+              <Button
+                title="Avançar"
+                color="#554f4f"
+                changeStep={handleStep.bind(this)}
+              />
+            )}
         </div>
       </div>
     </Container>
