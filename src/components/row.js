@@ -17,7 +17,7 @@ const Row = styled.div`
   margin-left: ${props => (props.wd ? "auto" : 0)};
   margin-right: ${props => (props.wd ? "auto" : 0)};
   flex-direction: row;
-  display: table;
+  display: flex;
   `
 
 export default Row;

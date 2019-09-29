@@ -15,6 +15,8 @@ const Col = styled.div`
     props.c === 11 && "91.6666667%" || "100%"
     )};
   float: ${props => (props.float ? props.float : "left")};
+  margin-left: ${props => (props.float && props.float !== "left" ? "auto" : "0")};
+  margin-right: ${props => (props.float && props.float !== "right" ? "auto" : "0")};
   height: auto;
   `;
 
