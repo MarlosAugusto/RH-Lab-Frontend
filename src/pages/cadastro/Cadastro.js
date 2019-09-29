@@ -14,7 +14,7 @@ import { Container, StepContainer } from "../../components/container";
 import Row from "../../components/row";
 import Col from "../../components/col";
 import Upload from "../../components/Upload/index";
-import FileList from "../../components/FileList";
+// // import FileList from "../../components/FileList";
 import ContatoList from "../../components/contact/contatoLista";
 export default function Cadastro() {
   const [step, setStep] = useState(0);
@@ -140,7 +140,7 @@ export default function Cadastro() {
 
     return (
       <div>
-        <Row wd={11}>
+        <Row>
           <BuscaCep
             type="text"
             onChange={e => setCEP(e.target.value)}
