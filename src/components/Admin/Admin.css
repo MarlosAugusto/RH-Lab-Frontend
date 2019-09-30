@@ -1,0 +1,16 @@
+.float-left {
+    float: left !important;
+}
+
+.padding-all-10 {
+    padding-top: 15px;
+    padding-left: 15px;
+}
+
+.font-size-18 {
+    font-size: 18px;
+}
+
+.font-size-28 {
+    font-size: 28px;
+}
