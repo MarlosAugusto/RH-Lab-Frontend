@@ -15,7 +15,8 @@ import Row from "../../components/row";
 import Col from "../../components/col";
 import Upload from "../../components/Upload/index";
 // // import FileList from "../../components/FileList";
-// import ContatoList from "../../components/contact/contatoLista";
+import ContactList from "../../components/contact/contactList";
+import AddNew from "../../components/contact/addNew";
 export default function Cadastro() {
   const [step, setStep] = useState(0);
 
@@ -193,31 +194,45 @@ export default function Cadastro() {
   function StepThree() {
     const [email, setEmail] = useState("");
     const [fone, setFone] = useState("");
-    const [text, setText] = useState("");
-    const [itens, setItens] = useState("");
+    const [aux, setAux] = useState("");
+    const [items, setItems] = useState([]);
 
-    function handleChange(e) {
-      setText(e.target.value);
-    }
+    // function handleChange(e) {
+    //   setText(e.target.value);
+    // }
 
-    function handleSubmit(e) {
-      e.preventDefaut();
-      if (!text.lenght) {
-        return;
+    function handleAdd(type, text) {
+      let itemsAux = items;
+      const itemFound = items.findIndex((it) => it.type === type && it.text === text);
+      if (itemFound < 0) {
+        setAux(`${type}${text}`);
+        itemsAux.push({ type, text });
+        setItems(itemsAux);
       }
-
-      const newItem = {
-        text: text,
-        id: Date.now()
-      };
-
-      setItens(itens.concat(newItem));
-      setText("");
     }
 
-    function removeItem(id) {
-      setItens(itens.filter(id));
-    }
+    // useEffect(() => {
+    //   console.log('itemsAux', items)
+    // }, [items]);
+
+    // function handleSubmit(e) {
+    //   e.preventDefaut();
+    //   if (!text.lenght) {
+    //     return;
+    //   }
+
+    //   const newItem = {
+    //     text: text,
+    //     id: Date.now()
+    //   };
+
+    //   setItems(items.concat(newItem));
+    //   setText("");
+    // }
+
+    // function removeItem(id) {
+    //   setItems(items.filter(id));
+    // }
     return (
       <div>
         <Row wd={11}>
@@ -225,7 +240,7 @@ export default function Cadastro() {
             <label>Email</label>
             <input
               className="u-full-width"
-              placeholder="seuemail@.com.br"
+              placeholder="seu@email.com.br"
               type="email"
               onChange={e => setEmail(e.target.value)}
               value={email}
@@ -242,9 +257,16 @@ export default function Cadastro() {
             />
           </Col>
         </Row>
-        
+        <Row wd={11}>
+          <AddNew handleAdd={handleAdd} />
+        </Row>
+        {
+          items && items.map(({ type, text }, index) =>
+            <ContactList key={index} type={type} text={text} />
+          )
+        }
         {/* <Row wd={11}>
-          <ContatoList itens={itens} removeItem={removeItem} />
+          <ContatoList items={items} removeItem={removeItem} />
         </Row> */}
       </div>
     );
@@ -322,12 +344,12 @@ export default function Cadastro() {
               changeStep={handleStep.bind(this)}
             />
           ) : (
-            <Button
-              title="Voltar"
-              color="#554f4f"
-              changeStep={handleStep.bind(this)}
-            />
-          )}
+              <Button
+                title="Voltar"
+                color="#554f4f"
+                changeStep={handleStep.bind(this)}
+              />
+            )}
         </div>
         <div style={{ width: "50%" }}>
           {step === 3 ? (
@@ -337,12 +359,12 @@ export default function Cadastro() {
               changeStep={handleStep.bind(this)}
             />
           ) : (
-            <Button
-              title="Avançar"
-              color="#554f4f"
-              changeStep={handleStep.bind(this)}
-            />
-          )}
+              <Button
+                title="Avançar"
+                color="#554f4f"
+                changeStep={handleStep.bind(this)}
+              />
+            )}
         </div>
       </div>
     </Container>

@@ -1,5 +1,4 @@
-import React from "react";
-import { useRef } from "react";
+import React, { useRef } from 'react'
 import useInputMask from "use-input-mask";
 import { createAutoCorrectedDatePipe } from "text-mask-addons";
 
