@@ -1,11 +1,11 @@
 import React from 'react';
 import ContatoItem from './contatoItem';
 
-export default (props) => {
+export default function contactList(list) {
 
   return (
     <ul >
-      {props.items.map(item => (
+      {list.map(item => (
         <ContatoItem
           key={item.id}
           item={item}

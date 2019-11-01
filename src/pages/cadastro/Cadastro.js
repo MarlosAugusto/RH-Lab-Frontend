@@ -15,7 +15,7 @@ import Row from "../../components/row";
 import Col from "../../components/col";
 import Upload from "../../components/Upload/index";
 // // import FileList from "../../components/FileList";
-import ContatoList from "../../components/contact/contatoLista";
+// import ContatoList from "../../components/contact/contatoLista";
 export default function Cadastro() {
   const [step, setStep] = useState(0);
 
@@ -242,25 +242,10 @@ export default function Cadastro() {
             />
           </Col>
         </Row>
-        <Row wd={11}>
-          <Col c={6}>
-            <label>Contatos adicionais</label>
-            <input
-              className="u-full-width"
-              placeholder="Digite seu contato adicional"
-              type="text"
-              onChange={handleChange}
-              value={text}
-            />
-          </Col>
-          <Col c={5} float={"right"}>
-            <br></br>
-            <button style={{ width: "100%", height: "44px" }}>Incluir</button>
-          </Col>
-        </Row>
-        <Row wd={11}>
+        
+        {/* <Row wd={11}>
           <ContatoList itens={itens} removeItem={removeItem} />
-        </Row>
+        </Row> */}
       </div>
     );
   }

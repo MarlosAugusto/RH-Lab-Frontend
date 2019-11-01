@@ -1,9 +1,9 @@
 import React from 'react';
 
-export default (props) => {
+export default function contactItem(item) {
   function deleteContato(event) {
     event.preventDefault();
-    props.removeItem(props.intem.id)
+    props.removeItem(item.id)
   }
 
   return (
