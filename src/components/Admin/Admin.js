@@ -1,209 +1,121 @@
-import React, { Component } from 'react';
+import React, { useState, useEffect } from 'react';
+import './Admin.css'
+import EmpresaLogo from '../../assets/images/logo-empresa.png'
+import PerfilLogo from '../../assets/images/perfil_icon.png'
+function Admin(props) {
 
-// import { Container } from './styles';
-import './Admin.css';
+    useEffect(() => {
+        console.log("use effect")
+        console.log(props)
+      }, [])
+    const [menu, setMenu] = useState(false)
 
-export default class Admin extends Component {
-  render() {
+    const toogleMenu = () => {
+        setMenu(!menu)
+    }
     return (
-      <div className="container-fluid">
-        <div className="row padding-all-10">
-          <span className="badge badge-danger">Notificações</span>
+        <div id="page-container" className={menu ? "main-admin show-menu" : "main-admin"}>
+            <nav className="navbar navbar-expand-lg navbar-light bg-light position-fixed w-100">
+                <a className="navbar-brand" onClick />
+                <div id="open-menu" className="menu-bar" onClick={toogleMenu}>
+                    <div className="bars" />
+                </div>
+                <ul className="navbar-nav ml-auto">
+                    <li className="nav-item dropdown ets-right-0">
+                        <a className="nav-link dropdown-toggle" onClick id="navbarDropdown" role="button" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
+                            <img src={PerfilLogo} className="img-fluid rounded-circle border user-profile" />
+                        </a>
+                        <div className="dropdown-menu" aria-labelledby="navbarDropdown">
+                            <a className="dropdown-item" onClick>Action</a>
+                            <a className="dropdown-item" onClick>Another action</a>
+                            <div className="dropdown-divider" />
+                            <a className="dropdown-item" onClick>Something else here</a>
+                        </div>
+                    </li>
+                </ul>
+            </nav>
+            <div className="side-bar">
+                <div className="side-bar-links">
+                    <div className="side-bar-logo text-center py-3">
+                        <img src={EmpresaLogo} className="img-fluid rounded-circle border bg-secoundry mb-3" />
+                        <h5>Company Name</h5>
+                    </div>
+                    <ul className="navbar-nav">
+                        <li className="nav-item">
+                            <a onClick className="nav-links d-block"><i className="fa fa-home pr-2" /> HOME</a>
+                        </li>
+                        <li className="nav-item">
+                            <a onClick className="nav-links d-block"><i className="fa fa-users pr-2" /> PESSOAS</a>
+                        </li>
+                        <li className="nav-item">
+                            <a onClick className="nav-links d-block"><i className="fa fa-list pr-2" /> VAGAS</a>
+                        </li>
+                        <li className="nav-item">
+                            <a onClick className="nav-links d-block"><i className="fa fa-sticky-note-o pr-2" /> ANOTAÇÕES</a>
+                        </li>
+                        <li className="nav-item">
+                            <a onClick className="nav-links d-block"><i className="fa fa-file-text pr-2" /> CURRÍCULOS</a>
+                        </li>
+                    </ul>
+                </div>
+                <div className="side-bar-icons">
+                    <div className="side-bar-logo text-center py-3">
+                        <img src={EmpresaLogo} className="img-fluid rounded-circle border bg-secoundry mb-3" />
+                        <h5>Company Name</h5>
+                    </div>
+
+
+                    <div className="icons d-flex flex-column align-items-center">
+                        <a className="set-width text-center display-inline-block my-1"><i className="fa fa-home" /></a>
+                        <a className="set-width text-center display-inline-block my-1"><i className="fa fa-users" /></a>
+                        <a className="set-width text-center display-inline-block my-1"><i className="fa fa-list" /></a>
+                        <a className="set-width text-center display-inline-block my-1"><i className="fa fa-sticky-note-o" /></a>
+                        <a className="set-width text-center display-inline-block my-1"><i className="fa fa-file-text" /></a>
+                    </div>
+                </div>
+            </div>
+            <div className="main-body-content w-100 ets-pt">
+                <div className="table-responsive bg-light">
+                    <table className="table">
+                        <tbody><tr>
+                            <th>Name</th>
+                            <th>Surname</th>
+                            <th>lorem</th>
+                            <th>ipssum</th>
+                            <th>Dollor</th>
+                        </tr>
+                            <tr>
+                                <td>Vinay</td>
+                                <td>Sharma</td>
+                                <td>lorem ipssum dollor dummy</td>
+                                <td>lorem ipssum dollor dummy</td>
+                                <td>lorem ipssum dollor dummy</td>
+                            </tr>
+                            <tr>
+                                <td>Vinay</td>
+                                <td>Sharma</td>
+                                <td>lorem ipssum dollor dummy</td>
+                                <td>lorem ipssum dollor dummy</td>
+                                <td>lorem ipssum dollor dummy</td>
+                            </tr>
+                            <tr>
+                                <td>Vinay</td>
+                                <td>Sharma</td>
+                                <td>lorem ipssum dollor dummy</td>
+                                <td>lorem ipssum dollor dummy</td>
+                                <td>lorem ipssum dollor dummy</td>
+                            </tr>
+                            <tr>
+                                <td>Vinay</td>
+                                <td>Sharma</td>
+                                <td>lorem ipssum dollor dummy</td>
+                                <td>lorem ipssum dollor dummy</td>
+                                <td>lorem ipssum dollor dummy</td>
+                            </tr>
+                        </tbody></table>
+                </div>
+            </div>
         </div>
-        <div className="row">
-
-          <div className="col-md-9">
-            <div className="card text-white bg-success">
-              <h5 className="card-header">
-                Alexander enviou um currículo para vaga de Analista de Sistemas
-              </h5>
-            </div>
-            <div className="card text-white bg-success">
-              <h5 className="card-header">
-                Washington enviou um currículo
-              </h5>
-            </div>
-            <div className="card text-white bg-success">
-              <h5 className="card-header">
-                Matias enviou um currículo para vaga de UX/UI Design
-              </h5>
-            </div>
-          </div>
-          <div className="col-md-3">
-            <span className="badge badge-info font-size-18">Olá @admin</span>
-            <div className="alert alert-success alert-dismissable">
-              <button type="button" className="close" data-dismiss="alert" aria-hidden="true">
-                ×
-        </button>
-              <strong>
-                Bom dia!
-        </strong> Hoje é aniversário de João Carlos (TogDesign). <a href="#home" className="alert-link">Convide todos da Sudotec para comemorar!</a>
-            </div>
-          </div>
-        </div>
-        <div className="row padding-all-10">
-          <div className="col-md-8">
-            <span className="badge badge-default font-size-28">Currículos</span>
-            <table className="table table-sm table-hover">
-              <thead>
-                <tr>
-                  <th>
-                    #ID
-                  </th>
-                  <th>
-                    Vaga
-                  </th>
-                  <th>
-                    Responsável
-                  </th>
-                  <th>
-                    Status
-                  </th>
-                </tr>
-              </thead>
-              <tbody>
-                <tr>
-                  <td>
-                    0
-                  </td>
-                  <td>
-                    Estágiário
-                  </td>
-                  <td>
-                    Genilson
-                  </td>
-                  <td>
-                    Pendente
-                  </td>
-                </tr>
-                <tr className="">
-                  <td>
-                    1
-                  </td>
-                  <td>
-                    Contador
-                  </td>
-                  <td>
-                    Letícia
-                  </td>
-                  <td>
-                    Aprovado
-                  </td>
-                </tr>
-                <tr className="">
-                  <td>
-                    2
-                  </td>
-                  <td>
-                    UX/UI Design
-                  </td>
-                  <td>
-                    Matias
-                  </td>
-                  <td>
-                    Pendente
-                  </td>
-                </tr>
-                <tr className="">
-                  <td>
-                    3
-                  </td>
-                  <td>
-
-                  </td>
-                  <td>
-                    Washington
-                  </td>
-                  <td>
-                    Pendente
-                  </td>
-                </tr>
-                <tr className="">
-                  <td>
-                    4
-                  </td>
-                  <td>
-                    Analista de Sistema
-                  </td>
-                  <td>
-                    Alexander
-                  </td>
-                  <td>
-                    Ligar para confirmar
-                  </td>
-                </tr>
-
-              </tbody>
-            </table>
-
-          </div>
-          <div className="col-md-4">
-            <span className="badge badge-default font-size-28">Vagas</span>
-            <table className="table table-sm table-hover">
-              <thead>
-                <tr>
-                  <th>
-                    Vaga
-                  </th>
-                  <th>
-                    Data Limite
-                  </th>
-                  <th>
-                    Currículos recebidos
-                  </th>
-                </tr>
-              </thead>
-              <tbody>
-                <tr>
-                  <td>
-                    UX/UI Design
-                  </td>
-                  <td>
-                    01/10/2019
-                  </td>
-                  <td>
-                    6
-                  </td>
-                </tr>
-                <tr className="">
-                  <td>
-                    Estagiário
-                  </td>
-                  <td>
-                    15/10/2019
-                  </td>
-                  <td>
-                    13
-                  </td>
-                </tr>
-                <tr className="">
-                  <td>
-                    Analista de Sistemas
-                  </td>
-                  <td>
-                    19/11/2019
-                  </td>
-                  <td>
-                    3
-                  </td>
-                </tr>
-                <tr className="">
-                  <td>
-                    Contador
-                  </td>
-                  <td>
-                    30/09/2019
-                  </td>
-                  <td>
-                    8
-                  </td>
-                </tr>
-              </tbody>
-            </table>
-            <button className="btn btn-secondary">Adicionar nova vaga</button>
-          </div>
-        </div>
-      </div>
     );
-  }
 }
+export default Admin;

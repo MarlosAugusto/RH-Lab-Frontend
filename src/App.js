@@ -1,30 +1,31 @@
-import React from 'react';
-import dotenv from 'dotenv';
-// import { Container } from "./components/container";
-// import { Header } from "./components/header";
-import Colaborador from './pages/colaborators/Colaborador';
-import BuscaCep from './pages/colaborators/BuscaCep';
-dotenv.config();
+import React, { useState, useEffect } from 'react';
 
-function App() {
-  // function handleTest() {
-  //   const data = {
-  //     method: 'POST',
-  //     headers: {
-  //       Accept: 'application/json',
-  //       'Content-Type': 'application/json; charset=utf-8'
-  //     },
-  //     mode: 'cors'
-  //   }
-  //   console.log("test")
-  //   fetch(`${process.env.DB_URI}/test`, data);
-  // }
-  return (
-    <div className="App">
-      {/* <BuscaCep /> */}
-      <Colaborador />
-    </div>
-  );
+import Admin from './components/Admin/Admin'
+import Login from './components/Login/Login'
+
+function App({username, type}) {
+    const [logado, setLogado] = useState(false)
+    const [user, setUser] = useState({})
+
+    useEffect(() => {
+        console.log('use effect');
+        console.log(username, type)
+        // const {username, type} = props;
+        // console.log(username, type)
+        if (username != null && type != null) {
+            setLogado(true)
+            setUser({username, type})
+        }
+    }, [])
+
+    return (
+        <div>
+            {logado
+                ? <Admin props={{ user: user }} />
+                : <Login />
+            }
+        </div>
+    )
+
 }
-
 export default App;
