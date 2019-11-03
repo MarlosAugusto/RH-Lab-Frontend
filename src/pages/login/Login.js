@@ -1,12 +1,12 @@
 import React, { useState, useEffect } from 'react';
 import './Login.css';
 import 'bootstrap/dist/css/bootstrap.min.css'
-import Admin from '../Admin/Admin'
+import Cadastro from '../cadastro/Cadastro'
 import App from '../../App'
 import Logo from '../../assets/images/rhlab.png'
 import db from '../../assets/db/db.json'
-
-
+import Row from "../../components/row";
+import Col from "../../components/col";
 
 function Login(props) {
   const [username, setUsername] = useState("")
@@ -41,21 +41,21 @@ function Login(props) {
 
   }
 
-  if(logged){
-      return(
-        <App username={user.username} type={user.type}/>
-      );
-  }else{
+  if (logged) {
+    return (
+      <App username={user.username} type={user.type} />
+    );
+  } else {
     return (
 
-      <div className="container">
-        <div className="card card-login mx-auto text-center bg-dark">
-          <div className="card-header mx-auto bg-dark">
+      <div >
+        <Row wd={11} className="card card-login mx-auto text-center bg-dark">
+          <Col className="card-header mx-auto bg-dark">
             <span> <img src={Logo} className="w-75" alt="Logo" /> </span><br />
             <span className="logo_title mt-5">  </span>
             {/*message*/}
-          </div>
-          <div className="card-body">
+          </Col>
+          <Col className="card-body">
             <form action="" method="">
               <div className="input-group form-group">
                 <div className="input-group-prepend">
@@ -73,8 +73,8 @@ function Login(props) {
                 <input type="button" name="btn" value="Login" className="btn btn-outline-danger float-right login_btn" onClick={() => login()} />
               </div>
             </form>
-          </div>
-        </div>
+          </Col>
+        </Row>
       </div>
     );
   }
