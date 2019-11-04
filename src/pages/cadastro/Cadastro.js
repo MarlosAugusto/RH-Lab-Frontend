@@ -257,7 +257,7 @@ export default function Cadastro() {
             />
           </Col>
         </Row>
-        <Row wd={11}>
+        <Row mt={15} wd={11}>
           <AddNew handleAdd={handleAdd} />
         </Row>
         {

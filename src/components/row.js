@@ -14,10 +14,12 @@ const Row = styled.div`
     props.wd === 10 && "83.3333333%" ||
     props.wd === 11 && "91.6666667%" || "100%")};
   height: auto;
+  margin-top: ${props => (props.mt ? `${props.mt}px` : 0)};
   margin-left: ${props => (props.wd ? "auto" : 0)};
   margin-right: ${props => (props.wd ? "auto" : 0)};
   flex-direction: row;
   display: flex;
+  font-size: 15px !important;
   `
 
 export default Row;
