@@ -21,7 +21,7 @@ function App({username, type}) {
     return (
         <div>
             {logado
-                ? <Admin props={{ user: user }} />
+                ? <Admin username={user.username} type={user.type} />
                 : <Login />
             }
         </div>
