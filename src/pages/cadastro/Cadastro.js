@@ -53,35 +53,41 @@ export default function Cadastro() {
 
   useEffect(() => {
     let contatosAux = contatos;
-    const type = 'primaryEmail';
-    const itemFound = contatos.findIndex((it) => it.type === type);
+    const type = "primaryEmail";
+    const itemFound = contatos.findIndex(it => it.type === type);
     if (itemFound >= 0) {
-      contatosAux[itemFound] = {type, contact: email}
+      contatosAux[itemFound] = { type, contact: email };
     } else {
-      contatosAux.push({type, contact: email})
+      contatosAux.push({ type, contact: email });
     }
     setContatos(contatosAux);
   }, [email]);
 
   useEffect(() => {
     let contatosAux = contatos;
-    const type = 'primaryPhone';
-    const itemFound = contatos.findIndex((it) => it.type === type);
+    const type = "primaryPhone";
+    const itemFound = contatos.findIndex(it => it.type === type);
     if (itemFound >= 0) {
-      contatosAux[itemFound] = {type, contact: fone}
+      contatosAux[itemFound] = { type, contact: fone };
     } else {
-      contatosAux.push({type, contact: fone})
+      contatosAux.push({ type, contact: fone });
     }
     setContatos(contatosAux);
   }, [fone]);
 
   function handleInsert() {
-    console.log('insert')
-    const url = 'https://rh-lab-backend.herokuapp.com/users'
-    if (nomeCompleto !== '' && email !== '' && cpf !== '' && rg !== '' && senha !== '') {
-      console.log('diferente de nulo')
+    console.log("insert");
+    const url = "https://rh-lab-backend.herokuapp.com/users";
+    if (
+      nomeCompleto !== "" &&
+      email !== "" &&
+      cpf !== "" &&
+      rg !== "" &&
+      senha !== ""
+    ) {
+      console.log("diferente de nulo");
       const user = {
-        type: 'user',
+        type: "user",
         name: nomeCompleto,
         email: email,
         CPF: cpf,
@@ -99,19 +105,20 @@ export default function Cadastro() {
         areas_of_interest: areaInteresse,
         vacancy_of_interest: vagaInteresse,
         wage_claim: pretSalarial
-      }
+      };
 
-      axios.post(url, user)
-        .then((res) => {
-          console.log(res)
-          console.log(res.data)
-        })
+      axios.post(url, user).then(res => {
+        console.log(res);
+        console.log(res.data);
+      });
     }
   }
 
   function handleAdd(type, text) {
     let contatosAux = contatos;
-    const itemFound = contatos.findIndex((it) => it.type === type && it.text === text);
+    const itemFound = contatos.findIndex(
+      it => it.type === type && it.text === text
+    );
     if (itemFound < 0) {
       setAux(`${type}${text}`);
       contatosAux.push({ type, contact: text });
@@ -321,11 +328,13 @@ export default function Cadastro() {
             <Row mt={15} wd={11}>
               <AddNew handleAdd={handleAdd} />
             </Row>
-            {
-              contatos && contatos.map(({ type, contact }, index) =>
-                index > 1 && <ContactList key={index} type={type} text={contact} />
-              )
-            }
+            {contatos &&
+              contatos.map(
+                ({ type, contact }, index) =>
+                  index > 1 && (
+                    <ContactList key={index} type={type} text={contact} />
+                  )
+              )}
             {/* <Row wd={11}>
             <ContatoList contatos={contatos} removeItem={removeItem} />
           </Row> */}
@@ -377,12 +386,12 @@ export default function Cadastro() {
               changeStep={handleStep.bind(this)}
             />
           ) : (
-              <Button
-                title="Voltar"
-                color="#554f4f"
-                changeStep={handleStep.bind(this)}
-              />
-            )}
+            <Button
+              title="Voltar"
+              color="#554f4f"
+              changeStep={handleStep.bind(this)}
+            />
+          )}
         </div>
         <div style={{ width: "50%" }}>
           {step === 3 ? (
@@ -393,12 +402,12 @@ export default function Cadastro() {
               outherFunction={handleInsert.bind(this)}
             />
           ) : (
-              <Button
-                title="Avançar"
-                color="#554f4f"
-                changeStep={handleStep.bind(this)}
-              />
-            )}
+            <Button
+              title="Avançar"
+              color="#554f4f"
+              changeStep={handleStep.bind(this)}
+            />
+          )}
         </div>
       </div>
     </Container>

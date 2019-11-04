@@ -1,7 +1,6 @@
 import React from "react";
 import styled from "styled-components/";
 
-
 const Txt = styled.span`
   color: ${props => props.color};
   font-size: 20px;
@@ -19,10 +18,22 @@ const Btn = styled.button`
   text-align: center;
 `;
 
-
-export default function Button({ title, color, bg, changeStep, outherFunction }) {
+export default function Button({
+  title,
+  color,
+  bg,
+  changeStep,
+  outherFunction
+}) {
   return (
-    <Btn color={color} bg={bg} onClick={() => {changeStep && changeStep(title); outherFunction && outherFunction()}}>
+    <Btn
+      color={color}
+      bg={bg}
+      onClick={() => {
+        changeStep && changeStep(title);
+        outherFunction && outherFunction();
+      }}
+    >
       {title}
       {/* <Txt color={color}>{title}</Txt> */}
     </Btn>
