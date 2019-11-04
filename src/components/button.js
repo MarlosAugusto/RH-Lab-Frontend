@@ -20,9 +20,9 @@ const Btn = styled.button`
 `;
 
 
-export default function Button({ title, color, bg, changeStep }) {
+export default function Button({ title, color, bg, changeStep, outherFunction }) {
   return (
-    <Btn color={color} bg={bg} onClick={() => (changeStep && changeStep(title))}>
+    <Btn color={color} bg={bg} onClick={() => {changeStep && changeStep(title); outherFunction && outherFunction()}}>
       {title}
       {/* <Txt color={color}>{title}</Txt> */}
     </Btn>
