@@ -1,42 +1,31 @@
-import React from 'react';
-import dotenv from 'dotenv';
-import logo from './logo.svg';
-import './App.css';
+import React, { useState, useEffect } from 'react';
 
-dotenv.config();
+import Admin from './components/Admin/Admin'
+import Login from './components/Login/Login'
 
-function App() {
-  // function handleTest() {
-  //   const data = {
-  //     method: 'POST',
-  //     headers: {
-  //       Accept: 'application/json',
-  //       'Content-Type': 'application/json; charset=utf-8'
-  //     },
-  //     mode: 'cors'
-  //   }
-  //   console.log("test")
-  //   fetch(`${process.env.DB_URI}/test`, data);
-  // }
-  return (
-    <div className="App">
-      <header className="App-header">
-        <img src={logo} className="App-logo" alt="logo" />
-        <p>
-          Edit <code>src/App.js</code> and save to reload.
-        </p>
-        <a
-          className="App-link"
-          href="https://reactjs.org"
-          target="_blank"
-          rel="noopener noreferrer"
-        >
-          Learn React
-        </a>
-        {/* <button onClick={() => handleTest()}>Test Back</button> */}
-      </header>
-    </div>
-  );
+function App({username, type}) {
+    const [logado, setLogado] = useState(false)
+    const [user, setUser] = useState({})
+
+    useEffect(() => {
+        console.log('use effect');
+        console.log(username, type)
+        // const {username, type} = props;
+        // console.log(username, type)
+        if (username != null && type != null) {
+            setLogado(true)
+            setUser({username, type})
+        }
+    }, [])
+
+    return (
+        <div>
+            {logado
+                ? <Admin username={user.username} type={user.type} />
+                : <Login />
+            }
+        </div>
+    )
+
 }
-
 export default App;
