@@ -1,17 +1,24 @@
-import React, { useState } from 'react';
-import styled from 'styled-components';
+import React, { useState } from "react";
+import styled from "styled-components";
 import Row from "../../components/row";
 import Col from "../../components/col";
 
-export const Container = styled.div`
-
-`;
-export default function AddNew({handleAdd}) {
+export const Container = styled.div``;
+export default function AddNew({ handleAdd }) {
   const [text, setText] = useState("");
   const [type, setType] = useState("Email");
 
   return (
-    <Row wd={12} style={{ borderRadius: "7px", border: "1px solid #00000066", paddingLeft: "5px", paddingRight: "5px", paddingBottom: "5px" }}>
+    <Row
+      wd={12}
+      style={{
+        borderRadius: "7px",
+        border: "1px solid #00000066",
+        paddingLeft: "5px",
+        paddingRight: "5px",
+        paddingBottom: "5px"
+      }}
+    >
       <Col c={3} float={"left"}>
         <label>Tipo</label>
         <select
@@ -42,8 +49,21 @@ export default function AddNew({handleAdd}) {
       </Col>
       <Col c={2} float={"right"}>
         <br></br>
-        <button style={{ width: "100%", padding: 0, marginTop: "5px", borderRadius: 10 }} onClick={() => handleAdd(type, text)}>Incluir</button>
+        <button
+          style={{
+            width: "100%",
+            padding: 0,
+            marginTop: "5px",
+            borderRadius: 10
+          }}
+          onClick={() => {
+            handleAdd(type, text);
+            setText("");
+          }}
+        >
+          Incluir
+        </button>
       </Col>
     </Row>
-  )
+  );
 }
