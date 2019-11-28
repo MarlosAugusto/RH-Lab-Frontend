@@ -1,6 +1,7 @@
 import React, { useState, useEffect } from 'react';
 import axios from 'axios'
 import Form from '../FormVaga/Vaga'
+import './Vagas.css'
 export default function Vagas({ view }) {
 
   const [vagaId, setVagaId] = useState('')
@@ -50,12 +51,12 @@ export default function Vagas({ view }) {
     console.log(vaga.title)
     return (
       <tr key={vaga.id} onClick={() => renderVagaSelected(vaga)}>
-        <th>{vaga.title}</th>
-        <th>{vaga.description}</th>
-        <th>{vaga.company}</th>
-        <th>{vaga.sector}</th>
-        <th>{vaga.type}</th>
-        <th>{vaga.nv_exp}</th>
+        <td>{vaga.title}</td>
+        <td>{vaga.description}</td>
+        <td>{vaga.company}</td>
+        <td>{vaga.sector}</td>
+        <td>{vaga.type}</td>
+        <td>{vaga.nv_exp}</td>
       </tr>
     );
   }
@@ -76,6 +77,14 @@ export default function Vagas({ view }) {
   } else {
     return (
       <div className="table-responsive bg-light">
+        <div className="container h-100">
+          <div className="d-flex justify-content-end h-100">
+            <div className="searchbar">
+              <input className="search_input" type="text" name placeholder="Procurar... " />
+              <a href="#" className="search_icon"><i className="fas fa-search" /></a>
+            </div>
+          </div>
+        </div>
         <table className="table table-hover" >
           <tbody>
             <tr>

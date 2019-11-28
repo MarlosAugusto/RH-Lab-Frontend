@@ -3,6 +3,7 @@ import './Admin.css'
 import EmpresaLogo from '../../assets/images/logo-empresa.png'
 import PerfilLogo from '../../assets/images/perfil_icon.png'
 import Vagas from '../Vagas/Vagas'
+import Pessoas from '../Pessoas/Pessoas'
 function Admin({ username, type }) {
 
   const [menu, setMenu] = useState(false)
@@ -13,48 +14,7 @@ function Admin({ username, type }) {
       case 'home':
         return <div>Home</div>
       case 'pessoas':
-          return (
-            <div className="table-responsive bg-light">
-              <table className="table table-hover" >
-                <tbody><tr>
-                  <th>Nome</th>
-                  <th>Função</th>
-                  <th>Início do Contrato</th>
-                  <th>Fim do Contrato</th>
-                  <th>Situação</th>
-                </tr>
-                  <tr>
-                    <td>Douglas Wender</td>
-                    <td>Frontend Developer</td>
-                    <td>01/08/2019</td>
-                    <td>01/12/2020</td>
-                    <td>Contratado</td>
-                  </tr>
-                  <tr>
-                    <td>Marlos Augusto</td>
-                    <td>Backend Developer</td>
-                    <td>01/08/2019</td>
-                    <td>01/12/2020</td>
-                    <td>Contratado</td>
-                  </tr>
-                  <tr>
-                    <td>Denis Stael</td>
-                    <td>Backend Developer</td>
-                    <td>01/08/2019</td>
-                    <td>01/12/2020</td>
-                    <td>Contratado</td>
-                  </tr>
-                  <tr>
-                    <td>Nathan Weber</td>
-                    <td>Frontend Developer</td>
-                    <td>01/08/2019</td>
-                    <td>01/12/2020</td>
-                    <td>Contratado</td>
-                  </tr>
-                </tbody></table>
-
-            </div>
-          )
+          return <Pessoas view={false}/>
       case 'vagas':
         console.log("call vagas")
         return <Vagas view={false}/>

@@ -50,25 +50,12 @@ export default function FormVaga({ id, title, description, sector, company, type
     const url = 'https://rh-lab-backend.herokuapp.com/vagas/'+vagaId
     if(vagaTitle !== '' && vagaDescription !== '' && vagaCompany !== '' && vagaType !== ''){
       axios.put(url, {
-        columns: [{
-          column: "title",
-          value: vagaTitle
-        }, {
-          column: "description",
-          value: vagaDescription
-        }, {
-          column: "company",
-          value: vagaCompany
-        }, {
-          column: "nv_exp",
-          value: vagaExperience
-        }, {
-          column: "sector",
-          value: vagaSector
-        }, {
-          column: "type",
-          value: vagaType
-        }]
+        title: vagaTitle,
+        description: vagaDescription,
+        sector: vagaSector,
+        company: vagaCompany,
+        type: vagaType,
+        nv_exp: vagaExperience
       })
     }
 
