@@ -2,41 +2,24 @@ import firebase from "@firebase/app";
 import "@firebase/auth";
 import "@firebase/storage";
 
-export const SignIn = async (email, password) => {
+export const POSTFILE = async (file, filename) => {
+  const storageRef = firebase.storage().ref();
+  const fileRef = storageRef.child(`curriculos/${filename}.pdf`);
   let success = false;
-  let error = null;
-  await firebase
-    .auth()
-    .signInWithEmailAndPassword(email, password)
-    .then(() => (success = true))
-    .catch(err => (error = err.code));
+  await fileRef.put(file)
+    .then(() => success = true)
+  // .catch(err => console.log('err', err))
+  return success;
+};
 
-  if (error) {
-    return error;
+export const GETFILE = async (filename) => {
+  const storageRef = firebase.storage().ref()
+  const fileRef = storageRef.child(`curriculos/${filename}.pdf`)
+  if (!fileRef) {
+    return false
   }
-
-  return success;
-};
-
-export const SignOut = async () => {
-  let success = false;
-  await firebase.auth().signOut()
-    .then(() => {
-      success = true;
-    });
-
-  return success;
-
-};
-
-export const SignUp = async (email, password) => {
-  let success = false;
-  await firebase
-    .auth()
-    .createUserWithEmailAndPassword(email, password)
-    .then(() => {
-      success = true;
-    });
-
-  return success;
-};
+  let file
+  await fileRef.getDownloadURL()
+    .then(url => file = url)
+  return file
+}

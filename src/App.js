@@ -6,7 +6,7 @@ import Cadastro from './pages/cadastro/Cadastro';
 import Login from './pages/login/Login';
 dotenv.config();
 
-function App({username, type}) {
+function App({ username, type }) {
   const [logado, setLogado] = useState(false)
   const [user, setUser] = useState({})
 
@@ -16,18 +16,18 @@ function App({username, type}) {
     // const {username, type} = props;
     // console.log(username, type)
     if (username != null && type != null) {
-        setLogado(true)
-        setUser({username, type})
+      setLogado(true)
+      setUser({ username, type })
     }
-}, [])
+  }, [])
 
   return (
     <div>
-            {logado
-                ? <Cadastro props={{ user: user }} />
-                : <Login />
-            }
-        </div>
+      {logado
+        ? <Cadastro props={{ user: user }} />
+        : <Login />
+      }
+    </div>
   );
 }
 
