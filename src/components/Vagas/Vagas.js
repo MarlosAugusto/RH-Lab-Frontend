@@ -1,6 +1,6 @@
 import React, { useState, useEffect } from 'react';
 import axios from 'axios'
-import Form from '../FormVaga/Vaga'
+import Form from './FormVaga/Vaga'
 import './Vagas.css'
 export default function Vagas({ view }) {
 

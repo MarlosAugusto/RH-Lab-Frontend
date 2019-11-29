@@ -4,6 +4,7 @@ import EmpresaLogo from '../../assets/images/logo-empresa.png'
 import PerfilLogo from '../../assets/images/perfil_icon.png'
 import Vagas from '../Vagas/Vagas'
 import Pessoas from '../Pessoas/Pessoas'
+import Anotacoes from '../Anotacoes/Anotacoes'
 function Admin({ username, type }) {
 
   const [menu, setMenu] = useState(false)
@@ -18,6 +19,8 @@ function Admin({ username, type }) {
       case 'vagas':
         console.log("call vagas")
         return <Vagas view={false}/>
+      case 'anotacoes':
+        return <Anotacoes/>
       default:
         console.log('default')
     }
