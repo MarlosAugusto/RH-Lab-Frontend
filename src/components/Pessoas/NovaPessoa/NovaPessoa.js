@@ -1,9 +1,6 @@
 import React, { useState, useEffect } from 'react';
 import axios from 'axios'
 
-import Pessoas from '../Pessoas'
-import Modal from './Modal';
-
 export default function NovaPessoa({ id, name, email, cpf, rg, genre, birth, cep, city, uf, street, number, complement, contacts, areas, wage, view }) {
   const [pessoaId, setPessoaId] = useState(id)
   const [pessoaName, setPessoaName] = useState(name)
@@ -82,24 +79,7 @@ export default function NovaPessoa({ id, name, email, cpf, rg, genre, birth, cep
   function handleInsert() {
     console.log('inserindo...');
     const url = 'https://rh-lab-backend.herokuapp.com/users/';
-    const pessoa = {
-      name: pessoaName,
-      email: pessoaEmail,
-      CPF: pessoaCpf,
-      RG: pessoaRg,
-      genre: pessoaGenre,
-      birth_date: pessoaBirth,
-      CEP: pessoaCep,
-      city: pessoaCity,
-      UF: pessoaUf,
-      street: pessoaStreet,
-      number: pessoaNumber,
-      complement: pessoaComplement,
-      contacts: pessoaContacts,
-      areas_of_interest: pessoaAreas,
-      wage_claim: pessoaWage
-    }
-    if (pessoaName !== '' && pessoaCpf !== '' && pessoaEmail !== '' && pessoaBirth != '') {
+    if (pessoaName !== '' && pessoaCpf !== '' && pessoaEmail !== '' && pessoaBirth !== '') {
       axios.post(url, {
         name: pessoaName,
         email: pessoaEmail,
@@ -145,7 +125,7 @@ export default function NovaPessoa({ id, name, email, cpf, rg, genre, birth, cep
       wage_claim: pessoaWage
     });
     const url = 'https://rh-lab-backend.herokuapp.com/users/' + pessoaId;
-    if (pessoaName !== '' && pessoaCpf !== '' && pessoaEmail !== '' && pessoaBirth != '') {
+    if (pessoaName !== '' && pessoaCpf !== '' && pessoaEmail !== '' && pessoaBirth !== '') {
       axios.put(url, {
         name: pessoaName,
         email: pessoaEmail,
@@ -162,6 +142,11 @@ export default function NovaPessoa({ id, name, email, cpf, rg, genre, birth, cep
         contacts: pessoaContacts,
         areas_of_interest: pessoaAreas,
         wage_claim: pessoaWage
+      }).then((res)=>{
+        console.log(res)
+        if(res.status === 200){
+           setSuccess(true)
+        }
       });
     }
   }
