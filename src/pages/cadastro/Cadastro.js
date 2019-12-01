@@ -1,4 +1,5 @@
 import React, { useState, useEffect } from "react";
+import useForm from 'react-hook-form'
 import "../css/prog-tracker.css";
 import "../css/skeleton.css";
 import { DateInput } from "../../components/date";
@@ -15,6 +16,7 @@ import AddNew from "../../components/contact/addNew";
 import axios from "axios";
 
 export default function Cadastro() {
+  const { register, handleSubmit, watch, errors } = useForm();
   const [step, setStep] = useState(0);
 
   const [nomeCompleto, setnomeCompleto] = useState("");
@@ -133,61 +135,78 @@ export default function Cadastro() {
     values.logradouro && setLogradouro(values.logradouro);
   }
 
+  const onSubmit = data => { console.log(data) }
   return (
+
     <Container wd={70}>
-      <StepContainer>
-        {step === 0 && (
-          <div>
+      <form onSubmit={handleSubmit(onSubmit)}>
+        <StepContainer>
+          <div style={{ display: step !== 0 ? 'none' : 'block' }}>
             <Row wd={11}>
               <Col>
-                <label>Nome</label>
+                <label>Nome*</label>
                 <input
+                  name="nomeCompleto"
+                  required="true"
+                  ref={register}
                   className="u-full-width"
                   placeholder="Nome completo"
                   type="text"
-                  onChange={e => setnomeCompleto(e.target.value)}
-                  value={nomeCompleto}
+                // onChange={e => setnomeCompleto(e.target.value)}
+                // value={nomeCompleto}
                 />
               </Col>
             </Row>
             <Row wd={11}>
               <Col c={6}>
-                <label>CPF</label>
+                <label>CPF*</label>
                 <input
+                  name="cpf"
+                  required="true"
+                  ref={register}
                   className="u-full-width"
                   type="text"
-                  onChange={e => setCPF(e.target.value)}
-                  value={cpf}
+                  // onChange={e => setCPF(e.target.value)}
+                  // value={cpf}
                   onBlur={e => validateCPF(e.target)}
                 />
               </Col>
               <Col c={5} float={"right"}>
-                <label>RG</label>
+                <label>RG*</label>
                 <input
+                  ref={register}
+                  name="rg"
+                  required="true"
                   className="u-full-width required"
                   type="text"
-                  onChange={e => setRG(e.target.value)}
-                  value={rg}
+                // onChange={e => setRG(e.target.value)}
+                // value={rg}
                 />
               </Col>
             </Row>
             <Row wd={11}>
               <Col c={6}>
-                <label>Data de Nascimento</label>
+                <label>Data de Nascimento*</label>
                 <DateInput
+                  required="true"
+                  ref={register}
+                  name="dataNasc"
                   type="text"
                   placeholder="DD/MM/AAAA"
-                  onChange={e => setdataNasc(e.target.value)}
-                  value={dataNasc}
+                // onChange={e => setdataNasc(e.target.value)}
+                // value={dataNasc}
                 ></DateInput>
               </Col>
               <Col c={5} float={"right"}>
-                <label>Gênero</label>
+                <label>Gênero*</label>
                 <select
+                  ref={register}
+                  name="genre"
+                  required="true"
                   style={{ width: "100%" }}
                   placeholder="Gênero"
-                  onChange={e => setGenre(e.target.value)}
-                  value={genre}
+                // onChange={e => setGenre(e.target.value)}
+                // value={genre}
                 >
                   <option value="Feminino">Feminino</option>
                   <option value="Masculino">Masculino</option>
@@ -202,49 +221,57 @@ export default function Cadastro() {
             </Row>
             <Row wd={11}>
               <Col>
-                <label>Senha</label>
+                <label>Senha*</label>
                 <input
+                  ref={register}
+                  name="senha"
+                  required="true"
                   className="u-full-width required"
                   placeholder="Senha"
                   type="password"
-                  onChange={e => setSenha(e.target.value)}
-                  value={senha}
+                // onChange={e => setSenha(e.target.value)}
+                // value={senha}
                 />
               </Col>
             </Row>
             <Row wd={11}>
               <Col>
-                <label>Confirmar senha</label>
+                <label>Confirmar senha*</label>
                 <input
+                  ref={register}
+                  name="confSenha"
+                  required="true"
                   className="u-full-width"
                   placeholder="Confirmar Senha"
                   type="password"
-                  onChange={e => setConfSenha(e.target.value)}
-                  value={confSenha}
+                // onChange={e => setConfSenha(e.target.value)}
+                // value={confSenha}
                 />
               </Col>
             </Row>
           </div>
-        )}
-        {step === 1 && (
-          <>
+          <div style={{ display: step !== 1 ? 'none' : 'block' }}>
             <Row wd={11}>
               <Col c={3} float={"left"}>
                 <label>CEP</label>
                 <input
+                  ref={register}
+                  name="cep"
                   type="text"
-                  onBlur={() => handeCEP()}
+                  // onBlur={() => handeCEP()}
                   required="true"
                   placeholder="Cep..."
                   className="u-full-width"
-                  onChange={e => setCEP(e.target.value)}
+                // onChange={e => setCEP(e.target.value)}
                 />
               </Col>
               <Col c={3} float={"center"}>
                 <label>UF</label>
                 <input
+                  ref={register}
+                  name="uf"
                   type="text"
-                  value={uf}
+                  // value={uf}
                   disabled
                   className="u-full-width required"
                 />
@@ -252,8 +279,10 @@ export default function Cadastro() {
               <Col c={4} float={"right"}>
                 <label>Cidade</label>
                 <input
+                  ref={register}
+                  name="cidade"
                   type="text"
-                  value={cidade}
+                  // value={cidade}
                   disabled
                   className="u-full-width required"
                 />
@@ -263,19 +292,23 @@ export default function Cadastro() {
               <Col c={6}>
                 <label>Logradouro</label>
                 <input
+                  ref={register}
+                  name="logradouro"
                   className="u-full-width"
                   type="text"
-                  onChange={e => setLogradouro(e.target.value)}
-                  value={logradouro}
+                // onChange={e => setLogradouro(e.target.value)}
+                // value={logradouro}
                 />
               </Col>
               <Col c={5} float={"right"}>
                 <label>Bairro</label>
                 <input
+                  ref={register}
+                  name="bairro"
                   className="u-full-width required"
                   type="text"
-                  onChange={e => setBairro(e.target.value)}
-                  value={bairro}
+                // onChange={e => setBairro(e.target.value)}
+                // value={bairro}
                 />
               </Col>
             </Row>
@@ -283,65 +316,71 @@ export default function Cadastro() {
               <Col c={6}>
                 <label>Número</label>
                 <input
+                  ref={register}
+                  name="num"
                   className="u-full-width"
                   type="text"
-                  onChange={e => setNum(e.target.value)}
-                  value={num}
+                // onChange={e => setNum(e.target.value)}
+                // value={num}
                 />
               </Col>
               <Col c={5} float={"right"}>
                 <label>Complemento</label>
                 <input
+                  ref={register}
+                  name="complemento"
                   className="u-full-width"
                   type="text"
-                  onChange={e => setComplemento(e.target.value)}
-                  value={complemento}
+                // onChange={e => setComplemento(e.target.value)}
+                // value={complemento}
                 />
               </Col>
             </Row>
-          </>
-        )}
-        {step === 2 && (
-          <div>
+          </div>
+          <div style={{ display: step !== 2 ? 'none' : 'block' }}>
             <Row wd={11}>
               <Col c={6}>
-                <label>Email</label>
+                <label>Email*</label>
                 <input
+                  ref={register}
+                  name="email"
+                  required="true"
                   className="u-full-width"
                   placeholder="seu@email.com.br"
                   type="email"
-                  onChange={e => setEmail(e.target.value)}
-                  value={email}
+                // onChange={e => setEmail(e.target.value)}
+                // value={email}
                 />
               </Col>
               <Col c={5} float={"right"}>
-                <label>Celular</label>
+                <label>Celular*</label>
                 <input
+                  ref={register}
+                  name="fone"
+                  required="true"
                   className="u-full-width"
                   placeholder="(99) 1234-12345"
                   type="text"
-                  onChange={e => setFone(e.target.value)}
-                  value={fone}
+                // onChange={e => setFone(e.target.value)}
+                // value={fone}
                 />
               </Col>
             </Row>
             <Row mt={15} wd={11}>
-              <AddNew handleAdd={handleAdd} />
+              {/* <AddNew handleAdd={handleAdd} /> */}
             </Row>
-            {contatos &&
+            {/* {contatos &&
               contatos.map(
                 ({ type, contact }, index) =>
                   index > 1 && (
                     <ContactList key={index} type={type} text={contact} />
                   )
-              )}
+              )} */}
             {/* <Row wd={11}>
             <ContatoList contatos={contatos} removeItem={removeItem} />
           </Row> */}
           </div>
-        )}
-        {step === 3 && (
-          <div>
+          <div style={{ display: step !== 3 ? 'none' : 'block' }}>
             <Row wd={11}>
               <Col>
                 <label>Área de interesse</label>
@@ -356,12 +395,15 @@ export default function Cadastro() {
             </Row>
             <Row wd={11}>
               <Col>
-                <label>Pretensão salarial</label>
+                <label>Pretensão salarial*</label>
                 <input
+                  ref={register}
+                  name="pretSalarial"
+                  required="true"
                   className="u-full-width"
                   type="text"
-                  onChange={e => setPretSalarial(e.target.value)}
-                  value={pretSalarial}
+                // onChange={e => setPretSalarial(e.target.value)}
+                // value={pretSalarial}
                 />
               </Col>
             </Row>
@@ -374,42 +416,45 @@ export default function Cadastro() {
               <Upload />
             </Row>
           </div>
-        )}
-      </StepContainer>
-      <div style={{ flexDirection: "row", display: "flex" }}>
-        <div style={{ width: "50%" }}>
-          {step === 0 ? (
-            <Button
-              style={{ marginRight: "10px" }}
-              title="Cancelar"
-              color="#ff0000"
-              changeStep={handleStep.bind(this)}
-            />
-          ) : (
-            <Button
-              title="Voltar"
-              color="#554f4f"
-              changeStep={handleStep.bind(this)}
-            />
-          )}
+        </StepContainer>
+        <div style={{ flexDirection: "row", display: "flex" }}>
+          <div style={{ width: "50%" }}>
+            {step === 0 ? (
+              <Button
+                style={{ marginRight: "10px" }}
+                title="Cancelar"
+                color="#ff0000"
+                changeStep={handleStep.bind(this)}
+              />
+            ) : (
+                <Button
+                  title="Voltar"
+                  color="#554f4f"
+                  changeStep={handleStep.bind(this)}
+                />
+              )}
+          </div>
+          <div style={{ width: "50%" }}>
+            {step === 3 ? (
+              <Button
+                title="Salvar"
+                type="submit"
+                color="#317452"
+                changeStep={handleStep.bind(this)}
+              // outherFunction={handleInsert.bind(this)}
+              // outherFunction={handleSubmit(onSubmit)}
+              />
+            ) : (
+                <Button
+                  title="Avançar"
+                  color="#554f4f"
+                  changeStep={handleStep.bind(this)}
+                />
+              )}
+          </div>
         </div>
-        <div style={{ width: "50%" }}>
-          {step === 3 ? (
-            <Button
-              title="Salvar"
-              color="#317452"
-              changeStep={handleStep.bind(this)}
-              outherFunction={handleInsert.bind(this)}
-            />
-          ) : (
-            <Button
-              title="Avançar"
-              color="#554f4f"
-              changeStep={handleStep.bind(this)}
-            />
-          )}
-        </div>
-      </div>
+
+      </form>
     </Container>
   );
 }

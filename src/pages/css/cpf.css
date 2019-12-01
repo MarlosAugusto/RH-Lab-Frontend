@@ -1,1 +1,5 @@
-.error { border: 1px solid red; color: red; }
+.error { border: 2px solid red; border-color: red; color: red; width: 100%;
+  box-sizing: border-box; }
+
+  .sucess { border: 2px solid green; border-color: green; color: green; width: 100%;
+    box-sizing: border-box; }

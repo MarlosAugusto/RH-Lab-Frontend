@@ -1,9 +1,8 @@
 import '../pages/css/cpf.css';
 export function validateCPF(input) {
   if (TestaCPF(input.value)) {
-    input.className = '';
+    input.className = 'sucess';
     console.log("Sucesso");
-    input.className = '';
   } else {
     input.className = 'error';
     input.focus();
