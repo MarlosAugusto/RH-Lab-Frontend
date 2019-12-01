@@ -4,8 +4,7 @@ import 'bootstrap/dist/css/bootstrap.min.css'
 import Admin from '../Admin/Admin'
 import App from '../../App'
 import Logo from '../../assets/images/rhlab.png'
-import db from '../../assets/db/db.json'
-
+import axios from 'axios'
 
 
 function Login(props) {
@@ -16,34 +15,26 @@ function Login(props) {
   const [logged, setLogged] = useState(false)
   useEffect(() => {
     console.log("use effect")
-    console.log(db.users)
-    setUsers(db.users)
-
-    // setUsers(JSON.parse(db))
   }, [setUser])
 
   function login() {
     console.log(username, '->', password)
     let isLogged;
-    console.log(users)
-    users.forEach(e => {
-      if (e.username === username && e.password === password) {
-        isLogged = {
-          username: e.username,
-          type: e.type
-        }
+    axios.post("https://rh-lab-backend.herokuapp.com/users/auth/login", {
+      email: username,
+      password: password
+    }).then((res)=>{
+      console.log(res)
+      if(res.status === 200){
         setLogged(true)
         setUser(isLogged)
-      } else {
-        console.log('errou')
       }
-    });
-
+    })
   }
 
   if(logged){
       return(
-        <App username={user.username} type={user.type}/>
+        <App username={username} type={username}/>
       );
   }else{
     return (

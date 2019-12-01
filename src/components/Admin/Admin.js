@@ -86,7 +86,6 @@ function Admin({ username, type }) {
         <div className="side-bar-icons">
           <div className="side-bar-logo text-center py-3">
             <img src={EmpresaLogo} className="img-fluid rounded-circle border bg-secoundry mb-3" />
-            <h5>{username}</h5>
           </div>
 
 
