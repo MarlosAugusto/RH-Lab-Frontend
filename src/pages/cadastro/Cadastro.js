@@ -11,9 +11,8 @@ import Row from "../../components/row";
 import Col from "../../components/col";
 import Upload from "../../components/Upload/index";
 // // import FileList from "../../components/FileList";
-import ContactList from "../../components/contact/contactList";
-import AddNew from "../../components/contact/addNew";
 import axios from "axios";
+import { POSTFILE } from "../../services/FB";
 
 export default function Cadastro() {
   const { register, handleSubmit, watch, errors } = useForm();
@@ -40,8 +39,8 @@ export default function Cadastro() {
   const [aux, setAux] = useState("");
   const [contatos, setContatos] = useState([]);
 
-  const [areaInteresse, setAreaInteresse] = useState("");
-  const [vagaInteresse, setVagaInteresse] = useState("");
+  const [areaInteresse, setAreaInteresse] = useState();
+  const [vagaInteresse, setVagaInteresse] = useState();
   const [pretSalarial, setPretSalarial] = useState("");
 
   function handleStep(type) {
@@ -53,80 +52,47 @@ export default function Cadastro() {
     }
   }
 
-  useEffect(() => {
-    let contatosAux = contatos;
-    const type = "primaryEmail";
-    const itemFound = contatos.findIndex(it => it.type === type);
-    if (itemFound >= 0) {
-      contatosAux[itemFound] = { type, contact: email };
-    } else {
-      contatosAux.push({ type, contact: email });
-    }
-    setContatos(contatosAux);
-  }, [email]);
+  // useEffect(() => {
+  //   let contatosAux = contatos;
+  //   const type = "primaryEmail";
+  //   const itemFound = contatos.findIndex(it => it.type === type);
+  //   if (itemFound >= 0) {
+  //     contatosAux[itemFound] = { type, contact: email };
+  //   } else {
+  //     contatosAux.push({ type, contact: email });
+  //   }
+  //   setContatos(contatosAux);
+  // }, [email]);
+
+  // useEffect(() => {
+  //   let contatosAux = contatos;
+  //   const type = "primaryPhone";
+  //   const itemFound = contatos.findIndex(it => it.type === type);
+  //   if (itemFound >= 0) {
+  //     contatosAux[itemFound] = { type, contact: fone };
+  //   } else {
+  //     contatosAux.push({ type, contact: fone });
+  //   }
+  //   setContatos(contatosAux);
+  // }, [fone]);
 
   useEffect(() => {
-    let contatosAux = contatos;
-    const type = "primaryPhone";
-    const itemFound = contatos.findIndex(it => it.type === type);
-    if (itemFound >= 0) {
-      contatosAux[itemFound] = { type, contact: fone };
-    } else {
-      contatosAux.push({ type, contact: fone });
-    }
-    setContatos(contatosAux);
-  }, [fone]);
+    getAreaInteresse()
+    getVagaInteresse()
+  }, [])
 
-  function handleInsert() {
-    console.log("insert");
-    const url = "https://rh-lab-backend.herokuapp.com/users";
-    if (
-      nomeCompleto !== "" &&
-      email !== "" &&
-      cpf !== "" &&
-      rg !== "" &&
-      senha !== ""
-    ) {
-      console.log("diferente de nulo");
-      const user = {
-        type: "user",
-        name: nomeCompleto,
-        email: email,
-        CPF: cpf,
-        RG: rg,
-        genre: genre,
-        birth_date: dataNasc,
-        password: senha,
-        CEP: cep,
-        city: cidade,
-        UF: uf,
-        street: logradouro,
-        number: num,
-        complement: complemento,
-        contacts: JSON.stringify(contatos),
-        areas_of_interest: areaInteresse,
-        vacancy_of_interest: vagaInteresse,
-        wage_claim: pretSalarial
-      };
 
-      axios.post(url, user).then(res => {
-        console.log(res);
-        console.log(res.data);
-      });
-    }
-  }
-
-  function handleAdd(type, text) {
-    let contatosAux = contatos;
-    const itemFound = contatos.findIndex(
-      it => it.type === type && it.text === text
-    );
-    if (itemFound < 0) {
-      setAux(`${type}${text}`);
-      contatosAux.push({ type, contact: text });
-      setContatos(contatosAux);
-    }
-  }
+  // function handleAdd(type, text) {
+  //   let contatosAux = contatos;
+  //   const itemFound = contatos.findIndex(
+  //     it => it.type === type && it.text === text
+  //   );
+  //   if (itemFound < 0) {
+  //     setAux(`${type}${text}`);
+  //     contatosAux.push({ type, contact: text });
+  //     setContatos(contatosAux);
+  //   }
+  // }
 
   async function handeCEP() {
     const values = await BuscaCep(cep);
@@ -135,7 +101,62 @@ export default function Cadastro() {
     values.logradouro && setLogradouro(values.logradouro);
   }
 
-  const onSubmit = data => { console.log(data) }
+  async function getAreaInteresse() {
+    const url = "https://rh-lab-backend.herokuapp.com/areas_of_interest";
+    const result = await axios.get(url)
+    console.log('result', result)
+    setAreaInteresse(result)
+  }
+
+  async function getVagaInteresse() {
+    const url = "https://rh-lab-backend.herokuapp.com/vagas";
+    const result = await axios.get(url)
+    console.log('result', result)
+    setVagaInteresse(result)
+  }
+
+  const onSubmit = async data => {
+    console.log('onSubmit', data)
+    const url = "https://rh-lab-backend.herokuapp.com/users";
+    if (
+      data.nomeCompleto &&
+      data.email &&
+      data.cpf &&
+      data.rg &&
+      data.senha
+    ) {
+      console.log("diferente de nulo");
+      let file = document.getElementById('file').files[0];
+      let filename = data.cpf.split('.').join('')
+      filename = filename.split('-').join('')
+      const result = await POSTFILE(file, filename)
+      console.log('filename', filename, 'result', result)
+      const dataNasc = data.dataNasc.split('/').join('-')
+      const user = {
+        name: data.nomeCompleto,
+        email: data.email,
+        CPF: data.cpf,
+        RG: data.rg,
+        genre: data.genre,
+        birth_date: dataNasc,
+        CEP: data.cep,
+        city: data.cidade,
+        UF: data.uf,
+        street: data.logradouro,
+        number: data.num,
+        complement: data.complemento,
+        // contacts: data.JSON.stringify(contatos),
+        areas_of_interest: data.areaInteresse,
+        vacancy_of_interest: data.vagaInteresse,
+        wage_claim: data.pretSalarial
+      };
+
+      axios.post(url, user).then(res => {
+        console.log(res);
+        console.log(res.data);
+      });
+    }
+  }
   return (
 
     <Container wd={70}>
@@ -187,7 +208,7 @@ export default function Cadastro() {
             <Row wd={11}>
               <Col c={6}>
                 <label>Data de Nascimento*</label>
-                <DateInput
+                <input
                   required="true"
                   ref={register}
                   name="dataNasc"
@@ -195,7 +216,7 @@ export default function Cadastro() {
                   placeholder="DD/MM/AAAA"
                 // onChange={e => setdataNasc(e.target.value)}
                 // value={dataNasc}
-                ></DateInput>
+                ></input>
               </Col>
               <Col c={5} float={"right"}>
                 <label>Gênero*</label>
@@ -384,13 +405,35 @@ export default function Cadastro() {
             <Row wd={11}>
               <Col>
                 <label>Área de interesse</label>
-                <select style={{ width: "100%" }}></select>
+                {/* <select
+                  ref={register}
+                  name="areaInteresse"
+                  required="true"
+                  placeholder="Área de interesse"
+                  style={{ width: "100%" }}>
+                  {
+                    areaInteresse && areaInteresse.map(ai =>
+                      <option value={ai}>{ai}</option>
+                    )
+                  }
+                </select> */}
               </Col>
             </Row>
             <Row wd={11}>
               <Col>
                 <label>Vaga de interesse</label>
-                <select style={{ width: "100%" }}></select>
+                {/* <select
+                  ref={register}
+                  name="vagaInteresse"
+                  required="true"
+                  placeholder="Vaga de interesse"
+                  style={{ width: "100%" }}>
+                  {
+                    vagaInteresse && vagaInteresse.map(vi =>
+                      <option value={vi}>{vi}</option>
+                    )
+                  }
+                </select> */}
               </Col>
             </Row>
             <Row wd={11}>
@@ -413,7 +456,7 @@ export default function Cadastro() {
               </Col>
             </Row>
             <Row wd={11}>
-              <Upload />
+              <input type="file" accept="pdf" id="file" />
             </Row>
           </div>
         </StepContainer>
@@ -442,7 +485,6 @@ export default function Cadastro() {
                 color="#317452"
                 changeStep={handleStep.bind(this)}
               // outherFunction={handleInsert.bind(this)}
-              // outherFunction={handleSubmit(onSubmit)}
               />
             ) : (
                 <Button

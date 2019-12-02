@@ -4,9 +4,8 @@ import 'bootstrap/dist/css/bootstrap.min.css'
 import Cadastro from '../cadastro/Cadastro'
 import App from '../../App'
 import Logo from '../../assets/images/rhlab.png'
-import db from '../../assets/db/db.json'
-import Row from "../../components/row";
-import Col from "../../components/col";
+import axios from 'axios'
+
 
 function Login(props) {
   const [username, setUsername] = useState("")
@@ -16,46 +15,38 @@ function Login(props) {
   const [logged, setLogged] = useState(false)
   useEffect(() => {
     console.log("use effect")
-    console.log(db.users)
-    setUsers(db.users)
-
-    // setUsers(JSON.parse(db))
   }, [setUser])
 
   function login() {
     console.log(username, '->', password)
     let isLogged;
-    console.log(users)
-    users.forEach(e => {
-      if (e.username === username && e.password === password) {
-        isLogged = {
-          username: e.username,
-          type: e.type
-        }
+    axios.post("https://rh-lab-backend.herokuapp.com/users/auth/login", {
+      email: username,
+      password: password
+    }).then((res) => {
+      console.log(res)
+      if (res.status === 200) {
         setLogged(true)
         setUser(isLogged)
-      } else {
-        console.log('errou')
       }
-    });
-
+    })
   }
 
   if (logged) {
     return (
-      <App username={user.username} type={user.type} />
+      <App username={username} type={username} />
     );
   } else {
     return (
 
-      <div >
-        <Row wd={11} className="card card-login mx-auto text-center bg-dark">
-          <Col className="card-header mx-auto bg-dark">
+      <div className="container">
+        <div className="card card-login mx-auto text-center bg-dark">
+          <div className="card-header mx-auto bg-dark">
             <span> <img src={Logo} className="w-75" alt="Logo" /> </span><br />
             <span className="logo_title mt-5">  </span>
             {/*message*/}
-          </Col>
-          <Col className="card-body">
+          </div>
+          <div className="card-body">
             <form action="" method="">
               <div className="input-group form-group">
                 <div className="input-group-prepend">
@@ -72,14 +63,14 @@ function Login(props) {
               <div className="form-group">
                 <input type="button" name="btn" value="Login" className="btn btn-outline-danger float-right login_btn" onClick={() => login()} />
               </div>
+              <div className="form-group">
+                <input type="button" name="btn" value="Cadastro" className="btn btn-outline-danger float-right login_btn" onClick={() => login()} />
+              </div>
             </form>
-          </Col>
-        </Row>
+          </div>
+        </div>
       </div>
     );
   }
-
-
 }
-
 export default Login;
