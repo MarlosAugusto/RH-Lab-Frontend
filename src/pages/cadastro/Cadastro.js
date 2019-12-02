@@ -10,6 +10,7 @@ import { Container, StepContainer } from "../../components/container";
 import Row from "../../components/row";
 import Col from "../../components/col";
 import Upload from "../../components/Upload/index";
+import ApiCep from "../../services/ApiCep";
 // // import FileList from "../../components/FileList";
 import axios from "axios";
 import { POSTFILE } from "../../services/FB";
@@ -17,7 +18,6 @@ import { POSTFILE } from "../../services/FB";
 export default function Cadastro() {
   const { register, handleSubmit, watch, errors } = useForm();
   const [step, setStep] = useState(0);
-
   const [nomeCompleto, setnomeCompleto] = useState("");
   const [rg, setRG] = useState("");
   const [dataNasc, setdataNasc] = useState("");
@@ -25,7 +25,6 @@ export default function Cadastro() {
   const [senha, setSenha] = useState("");
   const [confSenha, setConfSenha] = useState("");
   const [cpf, setCPF] = useState("");
-
   const [cep, setCEP] = useState("");
   const [cidade, setCidade] = useState("");
   const [uf, setUF] = useState("");
@@ -94,30 +93,38 @@ export default function Cadastro() {
   //   }
   // }
 
-  async function handeCEP() {
+  async function handeCEP(cep) {
     const values = await BuscaCep(cep);
+    console.log('values', values)
     setUF(values.uf);
     setCidade(values.localidade);
-    values.logradouro && setLogradouro(values.logradouro);
   }
 
   async function getAreaInteresse() {
     const url = "https://rh-lab-backend.herokuapp.com/areas_of_interest";
     const result = await axios.get(url)
-    console.log('result', result)
-    setAreaInteresse(result)
+    let aux = []
+    result.data.forEach(rs => {
+      console.log('getAreaInteresse', rs.name)
+      aux.push(rs.name)
+    })
+    setAreaInteresse(aux)
   }
 
   async function getVagaInteresse() {
     const url = "https://rh-lab-backend.herokuapp.com/vagas";
     const result = await axios.get(url)
-    console.log('result', result)
-    setVagaInteresse(result)
+    let aux = []
+    console.log('getVagaInteresse', result.data)
+    result.data.forEach(rs => {
+      aux.push(rs.title)
+    })
+    setVagaInteresse(aux)
   }
-
   const onSubmit = async data => {
     console.log('onSubmit', data)
     const url = "https://rh-lab-backend.herokuapp.com/users";
+
     if (
       data.nomeCompleto &&
       data.email &&
@@ -150,7 +157,6 @@ export default function Cadastro() {
         vacancy_of_interest: data.vagaInteresse,
         wage_claim: data.pretSalarial
       };
-
       axios.post(url, user).then(res => {
         console.log(res);
         console.log(res.data);
@@ -212,7 +218,7 @@ export default function Cadastro() {
                   required="true"
                   ref={register}
                   name="dataNasc"
-                  type="text"
+                  type="date"
                   placeholder="DD/MM/AAAA"
                 // onChange={e => setdataNasc(e.target.value)}
                 // value={dataNasc}
@@ -279,11 +285,11 @@ export default function Cadastro() {
                   ref={register}
                   name="cep"
                   type="text"
-                  // onBlur={() => handeCEP()}
+                  onBlur={() => handeCEP(cep)}
                   required="true"
                   placeholder="Cep..."
                   className="u-full-width"
-                // onChange={e => setCEP(e.target.value)}
+                //onChange={e => setCEP(e.target.value)}
                 />
               </Col>
               <Col c={3} float={"center"}>
@@ -292,8 +298,6 @@ export default function Cadastro() {
                   ref={register}
                   name="uf"
                   type="text"
-                  // value={uf}
-                  disabled
                   className="u-full-width required"
                 />
               </Col>
@@ -303,8 +307,6 @@ export default function Cadastro() {
                   ref={register}
                   name="cidade"
                   type="text"
-                  // value={cidade}
-                  disabled
                   className="u-full-width required"
                 />
               </Col>
@@ -405,7 +407,10 @@ export default function Cadastro() {
             <Row wd={11}>
               <Col>
                 <label>Área de interesse</label>
-                {/* <select
+                {/* <select style={{ width: "100%" }}>
+
+                </select> */}
+                <select
                   ref={register}
                   name="areaInteresse"
                   required="true"
@@ -416,24 +421,30 @@ export default function Cadastro() {
                       <option value={ai}>{ai}</option>
                     )
                   }
-                </select> */}
+                </select>
               </Col>
             </Row>
             <Row wd={11}>
               <Col>
                 <label>Vaga de interesse</label>
-                {/* <select
-                  ref={register}
+                {/* <select style={{ width: "100%" }}>
+
+                </select> */}
+                <select
+                  // ref={register}
                   name="vagaInteresse"
-                  required="true"
+                  //required="true"
                   placeholder="Vaga de interesse"
                   style={{ width: "100%" }}>
+                  <option></option>
                   {
                     vagaInteresse && vagaInteresse.map(vi =>
+
                       <option value={vi}>{vi}</option>
                     )
+
                   }
-                </select> */}
+                </select>
               </Col>
             </Row>
             <Row wd={11}>

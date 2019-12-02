@@ -4,9 +4,10 @@ import "../pages/css/prog-tracker.css";
 import "../pages/css/skeleton.css";
 
 async function handleDados(cep) {
+
   // Consultando a API
   let values;
-  await ApiCep.SearchCep(cep).then(res => values = res.data);
+  await ApiCep(cep).then((res) => values = res.data);
   return values;
 }
 
